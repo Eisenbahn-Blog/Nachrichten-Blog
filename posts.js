@@ -41,8 +41,11 @@ const posts = [
     excerpt: "Neuigkeiten rund um die Bahn im Murgtal.",
     important: true,
     content: `
-      <p>Hier ist ein zweiter Beispielbeitrag. Er zeigt, wie mehrere Beiträge auf der Startseite erscheinen.</p>
-      <p>Du kannst diesen Beitrag später einfach löschen oder durch eine echte Meldung ersetzen.</p>
+      <p>Durch die Umstellung auf die Regionalbahn wird die traditionelle Stadtbahnverbindung im oberen Murgtal verschwinden.</p>
+      <p>Durch die von DB Regio gewonnen Ausschreibung wird vorgesehen, dass zur Eröffnung des Rastatter Tunnels der letzte Teil der Ausschreibung
+      vollständig inkraft tritt. Das bedeutet, dass die Stadtbahnverbindung im Murgtal nicht mehr existieren wird. Die Stadtahnen der S8 wenden 
+      bereits in Forbach und werden zwischen Forbach und Freudenstadt durch den bisherien Regionalexpress ersetzt, welcher an allen Zwischenstationen halten soll. 
+      Wie genau der Fahrplan aussieht, zeigt sich kurz vor dem Fahrplanwechsel Anfang Dezember.</p>
     `
   }
 ];
