@@ -19,7 +19,7 @@ const posts = [
     date: "2026-08-15",
     author: "Leonard Klinger",
     category: "Meldungen",
-    categories: ["Baustellen", "Eisenbahn", "Baden-Württemberg", "Murgtalbahn", "Meldungen"],
+    categories: ["Baustellen", "Eisenbahn", "Murgtalbahn", "Meldungen"],
     image: "images/IMG_8786.JPG",
     excerpt: "Neue Blogbeiträge über die Eisenbahn und co.",
     important: false,
