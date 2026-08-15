@@ -15,31 +15,31 @@
 const posts = [
   {
     id: 1,
-    title: "Neue Bauarbeiten zwischen Karlsruhe und Rastatt",
+    title: "Neuer Blog",
     date: "2026-08-15",
-    author: "Leo",
-    category: "Baustellen",
-    categories: ["Baustellen", "Eisenbahn", "Baden-Württemberg"],
-    image: "images/beispiel-zug.svg",
-    excerpt: "Auf der Strecke zwischen Karlsruhe und Rastatt stehen neue Bauarbeiten an.",
-    important: true,
+    author: "Leonard Klinger",
+    category: "Alle",
+    categories: ["Baustellen", "Eisenbahn", "Baden-Württemberg", "Murgtalbahn"],
+    image: "images/IMG_8786.JPG",
+    excerpt: "Neue Blogbeiträge über dieEisenbahn und co.",
+    important: false,
     content: `
-      <p>Auf der Strecke zwischen Karlsruhe und Rastatt stehen neue Bauarbeiten an. In diesem Beispielartikel kannst du später deine eigene Meldung eintragen.</p>
+      <p>Das hier ist eine neue Website für Blogbeiträge.</p>
       <h2>Was ist geplant?</h2>
-      <p>Hier kommt der ausführliche Text deiner Meldung hin. Du kannst Absätze, Überschriften und weitere HTML-Elemente verwenden.</p>
-      <p><strong>Hinweis:</strong> Bei echten Nachrichten solltest du die Informationen und Quellen sorgfältig prüfen.</p>
+      <p>Hier kommen von mir (Leonard Klinger) neue Beiträge zur Eisenbahn und andere Bahnthemen in Baden-Württemberg.</p>
+      <p><strong>Hinweis:</strong> Es handelt sich immer um geprüfte Informationen</p>
     `
   },
   {
     id: 2,
-    title: "Neue Meldung aus dem Murgtal",
-    date: "2026-08-14",
-    author: "Leo",
+    title: "Stadtbahn verschwindet aus dem Murgtal",
+    date: "2026-08-15",
+    author: "Leonard Klinger",
     category: "Eisenbahn",
     categories: ["Eisenbahn", "Murgtalbahn"],
-    image: "images/beispiel-murgtal.svg",
-    excerpt: "Neuigkeiten rund um die Eisenbahn im Murgtal.",
-    important: false,
+    image: "images/IMG_9559.JPG",
+    excerpt: "Neuigkeiten rund um die Bahn im Murgtal.",
+    important: true,
     content: `
       <p>Hier ist ein zweiter Beispielbeitrag. Er zeigt, wie mehrere Beiträge auf der Startseite erscheinen.</p>
       <p>Du kannst diesen Beitrag später einfach löschen oder durch eine echte Meldung ersetzen.</p>
