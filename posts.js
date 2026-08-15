@@ -26,7 +26,7 @@ const posts = [
     content: `
       <p>Das hier ist eine neue Website für Blogbeiträge.</p>
       <h2>Was ist geplant?</h2>
-      <p>Hier kommen von mir (Leonard Klinger) und anderen Autorenneue Beiträge zur Eisenbahn und andere Bahnthemen in Baden-Württemberg.</p>
+      <p>Hier kommen von mir (Leonard Klinger) und anderen Autoren neue Beiträge zur Eisenbahn und andere Bahnthemen in Baden-Württemberg.</p>
       <p><strong>Hinweis:</strong> Es handelt sich immer um geprüfte Informationen</p>
     `
   },
