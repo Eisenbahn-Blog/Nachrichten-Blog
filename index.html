@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eisenbahn-News aus Baden-Württemberg – Meldungen, Baustellen, ÖPNV und mehr.">
+  <title>Eisenbahn-News Baden-Württemberg</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">🚆</span>
+        <span>
+          <strong>Eisenbahn-News</strong>
+          <small>Baden-Württemberg</small>
+        </span>
+      </a>
+      <button class="menu-button" id="menuButton" aria-label="Menü öffnen">☰</button>
+      <nav id="mainNav">
+        <a class="active" href="index.html">Startseite</a>
+        <a href="#meldungen">Meldungen</a>
+        <a href="#kategorien">Kategorien</a>
+        <a href="#ueber-mich">Über mich</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-overlay">
+        <span class="eyebrow">Eisenbahn & ÖPNV</span>
+        <h1>Neuigkeiten auf der Schiene.</h1>
+        <p>Aktuelle Meldungen, Baustellen, Fahrzeuge und spannende Themen rund um die Eisenbahn in Baden-Württemberg.</p>
+        <a class="button" href="#meldungen">Zu den Meldungen ↓</a>
+      </div>
+    </section>
+
+    <section class="container important" id="importantBox"></section>
+
+    <section class="container section" id="meldungen">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Neueste Beiträge</span>
+          <h2>Aktuelle Meldungen</h2>
+        </div>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="post-grid" id="postGrid"></div>
+      <p class="empty" id="emptyState" hidden>Keine Beiträge in dieser Kategorie gefunden.</p>
+    </section>
+
+    <section class="container section" id="kategorien">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Themen</span>
+          <h2>Kategorien</h2>
+        </div>
+      </div>
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <section class="container section about" id="ueber-mich">
+      <span class="eyebrow">Über den Blog</span>
+      <h2>Eisenbahn-News aus der Region</h2>
+      <p>Hier erscheinen eigene Meldungen und Beiträge zu Eisenbahn, ÖPNV, Baustellen, Fahrzeugen und weiteren Themen – mit besonderem Blick auf Baden-Württemberg.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Eisenbahn-News Baden-Württemberg</span>
+      <span>Privater Eisenbahn-Blog</span>
+    </div>
+  </footer>
+
+  <script src="posts.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
