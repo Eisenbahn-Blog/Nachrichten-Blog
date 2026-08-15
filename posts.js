@@ -21,7 +21,7 @@ const posts = [
     category: "Alle",
     categories: ["Baustellen", "Eisenbahn", "Baden-Württemberg", "Murgtalbahn"],
     image: "images/IMG_8786.JPG",
-    excerpt: "Neue Blogbeiträge über dieEisenbahn und co.",
+    excerpt: "Neue Blogbeiträge über die Eisenbahn und co.",
     important: false,
     content: `
       <p>Das hier ist eine neue Website für Blogbeiträge.</p>
