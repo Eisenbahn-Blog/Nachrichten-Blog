@@ -35,7 +35,7 @@ const posts = [
     title: "Stadtbahn verschwindet aus dem Murgtal",
     date: "2026-08-15",
     author: "Leonard Klinger",
-    category: "Eisenbahn",
+    category: "Murgtalbahn",
     categories: ["Eisenbahn", "Murgtalbahn"],
     image: "images/IMG_9559.JPG",
     excerpt: "Neuigkeiten rund um die Bahn im Murgtal.",
