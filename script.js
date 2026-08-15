@@ -72,7 +72,7 @@ function renderHome() {
   if (important && importantBox) {
     importantBox.innerHTML = `
       <a href="artikel.html?id=${important.id}" class="important-inner">
-        <span class="important-label">🔴 Eilmeldung</span>
+        <span class="important-label">🔵 Interessant</span>
         <strong>${important.title}</strong>
         <span>Artikel lesen →</span>
       </a>`;
