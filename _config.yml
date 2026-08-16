@@ -1,0 +1,27 @@
+title: Eisenbahn-News Baden-Württemberg
+description: Nachrichten rund um Eisenbahn und ÖPNV in Baden-Württemberg.
+url: "https://leonard566.github.io"
+baseurl: "/Nachrichten-Blog"
+lang: de
+timezone: Europe/Berlin
+markdown: kramdown
+permalink: /artikel/:year/:month/:day/:title/
+collections:
+  authors:
+    output: false
+  categories:
+    output: false
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      breaking: false
+      categories: []
+      author: "Leo"
+      image: ""
+      caption: ""
+      credit: ""
+      alt: ""
+      gallery: []
