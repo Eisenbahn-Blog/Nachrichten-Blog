@@ -47,14 +47,14 @@ const posts = [
       bereits in Forbach und werden zwischen Forbach und Freudenstadt durch den bisherien Regionalexpress ersetzt, welcher an allen Zwischenstationen halten soll. 
       Wie genau der Fahrplan aussieht, zeigt sich kurz vor dem Fahrplanwechsel Anfang Dezember.</p>
     `
-  }
+  },
   {
     id: 3,
     title: "Kurzmeldungen",
     date: "2026-08-16",
     author: "Leonard Klinger",
     category: "Meldungen",
-    categories: ["Eisenbahn", "Murgtalbahn", "Meldungen"],
+    categories: ["Eisenbahn", "Murgtalbahn", "Meldungen", "Baustellen", "Fahrplan & Verkehr"],
     image: "images/KURZMELDUNGEN.png",
     excerpt: "Die Kurzmeldungen der Woche.",
     important: false,
