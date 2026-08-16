@@ -55,19 +55,19 @@ const posts = [
     author: "Leonard Klinger",
     category: "Meldungen",
     categories: ["Eisenbahn", "Murgtalbahn", "Meldungen", "Baustellen", "Fahrplan & Verkehr"],
-    image: "images/KURZMELDUNGEN.png",
-    excerpt: "Die Kurzmeldungen der Woche.",
+    image: "images/KURZMELDUNGEN.jpg",
+    excerpt: "Die Kurzmeldungen der Kalenderwoche 33.",
     important: false,
     content: `
       <p>Was diese Woche wichtig war!</p>
-      <h3>Stuttgart: Unbekannte Person attackiert Fahrgäste und wirft Steine auuf S-Bahn</h3>
+      <h3>Stuttgart: Unbekannte Person attackiert Fahrgäste und wirft Steine auf S-Bahn</h3>
       <p>Im Stuttgarter Nordbahnhof hat am Donnerstag ein unbekannter Mann Reisende beleidigt, bedroht und mit Steinen beworfen. Laut Polizei
       hat er eine Zigarette nach einer Frau geworfen, welche ihn auf das Raucherverbot hinwies. Daraufhin hat er eine Teenagerin beleidigt und 
-      mit einem Becher beworfen.Eine weitere Frau soolle er ebenfalls bespuckt haben.Der Mann betrat den Gleisbereich und bewarf eine einfahrende S-Bahn
+      mit einem Becher beworfen. Eine weitere Frau solle er ebenfalls bespuckt haben.Der Mann betrat den Gleisbereich und bewarf eine einfahrende S-Bahn
       der Linie S6 mit Steinen. Eine Fahndung der Polizei ist fehlgeschlagen. Die Bundespolizei ermittelt unter anderem wegen des Verdachts der Beleidigung 
       und Bedrohung und sucht Zeugen.</p>
       <h3>Rheintalbahn: Baumaßnahmen dieses Wochenende</h3>
-      <p>Auf der Rheintalbahn finden dieses Wochenende noch bis Montagmorgen Bauarbeiten statt.Laut der Deutschen Bahn entfallen die Regionalbahnen des RE7 und der RB26
+      <p>Auf der Rheintalbahn finden dieses Wochenende noch bis Montagmorgen Bauarbeiten statt. Laut der Deutschen Bahn entfallen die Regionalbahnen des RE7 und der RB26
       zwischen Offenburg und Herbolzheim. Der Fernverkehr fällt zwischen Offenburg und Freiburg Hauptbahnhof aus. Ein Schienenersatzverkehr ist eingerichtet.</p>
       <p>Die nächste Sperrung der Rheintalbahn ist am Wochenende 18. bis 21. September vorgesehen.</p>
     `
