@@ -54,7 +54,7 @@ const posts = [
     date: "2026-08-16",
     author: "Leonard Klinger",
     category: "Meldungen",
-    categories: ["Eisenbahn", "Murgtalbahn", "Meldungen", "Baustellen", "Fahrplan & Verkehr"],
+    categories: ["Eisenbahn", "Meldungen", "Baustellen", "Fahrplan & Verkehr"],
     image: "images/KURZMELDUNGEN.jpg",
     excerpt: "Die Kurzmeldungen der Kalenderwoche 33.",
     important: false,
