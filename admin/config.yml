@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: leonard566/Nachrichten-Blog
+  name: git-gateway
   branch: main
   open_authoring: true
 publish_mode: editorial_workflow
