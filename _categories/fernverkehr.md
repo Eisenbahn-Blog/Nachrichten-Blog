@@ -1,5 +1,5 @@
 ---
 name: Eisenbahn
-description: Nachrichten rund um die Fernverkehr.
+description: Nachrichten rund um den Fernverkehr.
 icon: 🚆
 ---
