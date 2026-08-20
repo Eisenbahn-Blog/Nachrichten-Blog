@@ -1,5 +1,5 @@
 ---
-name: Baden-Württemberg
+name: Stuttgart
 description: Meldungen aus Stuttgart.
 icon: 📍
 ---
