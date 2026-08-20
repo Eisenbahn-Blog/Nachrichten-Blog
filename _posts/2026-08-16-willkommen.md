@@ -2,7 +2,7 @@
 title: Willkommen bei Eisenbahn-News Baden-Württemberg
 date: 2026-08-16 09:30:00 +0200
 author: Leonard Klinger
-image: /Nachrichten-Blog/assets/uploads/img_7712.jpg
+image: ""
 caption: ""
 credit: Leonard Klinger
 alt: ""
