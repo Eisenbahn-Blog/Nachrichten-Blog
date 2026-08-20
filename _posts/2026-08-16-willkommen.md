@@ -2,20 +2,16 @@
 title: Willkommen bei Eisenbahn-News Baden-Württemberg
 date: 2026-08-16 09:30:00 +0200
 author: Leonard Klinger
-image: /assets/images/hero.svg
-caption: Willkommen auf Eisenbahn-News Baden-Württemberg.
-credit: "Grafik: Eisenbahn-News"
-alt: Grafische Darstellung einer Eisenbahnstrecke
+image: /Nachrichten-Blog/assets/uploads/img_7712.jpg
+caption: ""
+credit: Leonard Klinger
+alt: ""
 excerpt: Der neue Eisenbahn-Blog für Meldungen, Baustellen, Fahrzeuge und
   weitere Themen.
 breaking: false
 categories:
   - ÖPNV
-gallery:
-  - image: /assets/images/hero.svg
-    caption: Beispiel für eine Bildunterschrift unter einem Galeriebild.
-    credit: "Grafik: Eisenbahn-News"
-    alt: Grafische Darstellung einer Eisenbahnstrecke
+gallery: []
 ---
 Willkommen bei **Eisenbahn-News Baden-Württemberg**.
 
