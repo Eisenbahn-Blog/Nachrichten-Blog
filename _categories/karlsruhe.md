@@ -1,5 +1,5 @@
 ---
-name: Baden-Württemberg
+name: Karlsruhe
 description: Meldungen aus Karlsruhe.
 icon: 📍
 ---
