@@ -34,13 +34,14 @@ collections:
         value_field: "name"
         display_fields: ["name"]
 
-      - label: "Kategorie"
+      - label: "Kategorien"
         name: "categories"
         widget: "relation"
         collection: "categories"
-        search_fields: ["title"]
-        value_field: "title"
-        display_fields: ["title"]
+        multiple: true
+        search_fields: ["name"]
+        value_field: "name"
+        display_fields: ["name"]
 
       - label: "Titelbild"
         name: "image"
@@ -48,14 +49,53 @@ collections:
         required: false
 
       - label: "Bildunterschrift"
-        name: "image_caption"
+        name: "caption"
+        widget: "string"
+        required: false
+
+      - label: "Bildnachweis"
+        name: "credit"
+        widget: "string"
+        required: false
+
+      - label: "Alternativtext"
+        name: "alt"
         widget: "string"
         required: false
 
       - label: "Eilmeldung"
-        name: "breaking_news"
+        name: "breaking"
         widget: "boolean"
         default: false
+
+      - label: "Kurzbeschreibung"
+        name: "excerpt"
+        widget: "text"
+        required: false
+
+      - label: "Bildergalerie"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Bild"
+            name: "image"
+            widget: "image"
+
+          - label: "Bildunterschrift"
+            name: "caption"
+            widget: "string"
+            required: false
+
+          - label: "Bildnachweis"
+            name: "credit"
+            widget: "string"
+            required: false
+
+          - label: "Alternativtext"
+            name: "alt"
+            widget: "string"
+            required: false
 
       - label: "Inhalt"
         name: "body"
@@ -88,7 +128,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - label: "Name"
-        name: "title"
+        name: "name"
         widget: "string"
 
       - label: "Beschreibung"
