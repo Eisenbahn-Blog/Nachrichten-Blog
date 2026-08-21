@@ -1,63 +1,95 @@
 backend:
   name: git-gateway
   branch: main
-  open_authoring: true
+
 publish_mode: editorial_workflow
+
 media_folder: "assets/uploads"
 public_folder: "/Nachrichten-Blog/assets/uploads"
+
 site_url: "https://leonard566.github.io/Nachrichten-Blog"
-display_url: "https://leonard566.github.io/Nachrichten-Blog"
+
 collections:
-  - name: "blog"
+  - name: "posts"
     label: "Beiträge"
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Titel", name: "title", widget: "string" }
-      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss ZZ", date_format: "DD.MM.YYYY", time_format: "HH:mm" }
-      - { label: "Autor", name: "author", widget: "string", default: "Leo" }
-      - { label: "Titelbild", name: "image", widget: "image", required: false }
-      - { label: "Bildunterschrift", name: "caption", widget: "string", required: false }
-      - { label: "Bildquelle / Copyright", name: "credit", widget: "string", required: false }
-      - { label: "Alt-Text", name: "alt", widget: "string", required: false }
-      - { label: "Kurzbeschreibung", name: "excerpt", widget: "text", required: false }
-      - { label: "Eilmeldung", name: "breaking", widget: "boolean", default: false }
-      - label: "Kategorien"
+      - label: "Titel"
+        name: "title"
+        widget: "string"
+
+      - label: "Veröffentlichungsdatum"
+        name: "date"
+        widget: "datetime"
+
+      - label: "Autor"
+        name: "author"
+        widget: "relation"
+        collection: "authors"
+        search_fields: ["name"]
+        value_field: "name"
+        display_fields: ["name"]
+
+      - label: "Kategorie"
         name: "categories"
         widget: "relation"
         collection: "categories"
-        multiple: true
-        search_fields: ["name"]
-        value_field: "name"
-        display_fields: ["name", "description"]
-      - label: "Bildergalerie"
-        name: "gallery"
-        widget: "list"
+        search_fields: ["title"]
+        value_field: "title"
+        display_fields: ["title"]
+
+      - label: "Titelbild"
+        name: "image"
+        widget: "image"
         required: false
-        summary: "{{fields.caption}}"
-        fields:
-          - { label: "Bild", name: "image", widget: "image" }
-          - { label: "Bildunterschrift", name: "caption", widget: "string", required: false }
-          - { label: "Bildquelle / Copyright", name: "credit", widget: "string", required: false }
-          - { label: "Alt-Text", name: "alt", widget: "string", required: false }
-      - { label: "Artikel", name: "body", widget: "markdown" }
+
+      - label: "Bildunterschrift"
+        name: "image_caption"
+        widget: "string"
+        required: false
+
+      - label: "Eilmeldung"
+        name: "breaking_news"
+        widget: "boolean"
+        default: false
+
+      - label: "Inhalt"
+        name: "body"
+        widget: "markdown"
+
+  - name: "authors"
+    label: "Autoren"
+    folder: "_authors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+
+      - label: "Beschreibung"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "Profilbild"
+        name: "image"
+        widget: "image"
+        required: false
+
   - name: "categories"
     label: "Kategorien"
     folder: "_categories"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Beschreibung", name: "description", widget: "text", required: false }
-      - { label: "Symbol", name: "icon", widget: "string", default: "📰", required: false }
-  - name: "authors"
-    label: "Autorenprofile"
-    folder: "_authors"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Rolle", name: "role", widget: "string", default: "Autor" }
-      - { label: "Profilbild", name: "image", widget: "image", required: false }
-      - { label: "Beschreibung", name: "bio", widget: "text", required: false }
+      - label: "Name"
+        name: "title"
+        widget: "string"
+
+      - label: "Beschreibung"
+        name: "description"
+        widget: "text"
+        required: false
