@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: leonard566/Nachrichten-Blog
   branch: main
+  base_url: "https://nachrichten-blog.leonardklinger9.workers.dev" 
 
 publish_mode: editorial_workflow
 
