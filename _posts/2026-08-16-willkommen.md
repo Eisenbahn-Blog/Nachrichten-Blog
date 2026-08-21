@@ -5,7 +5,7 @@ author: Leonard Klinger
 categories:
   - Eisenbahn
   - Baden-Württemberg
-image: /Nachrichten-Blog/assets/uploads/img_7712.jpg
+image: /assets/images/hero.svg
 caption: Willkommen auf Eisenbahn-News Baden-Württemberg.
 credit: "Grafik: Eisenbahn-News"
 alt: Grafische Darstellung einer Eisenbahnstrecke
