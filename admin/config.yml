@@ -39,7 +39,7 @@ collections:
         value_field: "name"
         display_fields: ["name"]
 
-      - label: "Kategorien"
+      - label: "Themen"
         name: "categories"
         widget: "relation"
         collection: "categories"
@@ -47,6 +47,32 @@ collections:
         search_fields: ["name"]
         value_field: "name"
         display_fields: ["name"]
+
+      - label: "Bundesland / Region"
+        name: "region"
+        widget: "select"
+        required: false
+        options:
+          - "Deutschlandweit"
+          - "Baden-Württemberg"
+          - "Bayern"
+          - "Berlin"
+          - "Brandenburg"
+          - "Bremen"
+          - "Hamburg"
+          - "Hessen"
+          - "Mecklenburg-Vorpommern"
+          - "Niedersachsen"
+          - "Nordrhein-Westfalen"
+          - "Rheinland-Pfalz"
+          - "Saarland"
+          - "Sachsen"
+          - "Sachsen-Anhalt"
+          - "Schleswig-Holstein"
+          - "Thüringen"
+          - "Österreich"
+          - "Schweiz"
+          - "International"
 
       - label: "Titelbild"
         name: "image"
