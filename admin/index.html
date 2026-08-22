@@ -8,22 +8,142 @@
 
   <style>
     /*
-     * GitHub-Link im Decap-CMS ausblenden.
-     *
-     * Decap kann seine Header-Struktur je nach Version verändern.
-     * Deshalb verwenden wir mehrere Selektoren.
+     * ============================================================
+     * Eisenbahn-Blog – Decap CMS Design
+     * ============================================================
+     */
+
+    :root {
+      --blog-red: #d71920;
+      --blog-red-dark: #b51218;
+      --blog-dark: #18212b;
+      --blog-gray: #697582;
+      --blog-border: #e1e6ea;
+      --blog-bg: #f5f7f9;
+      --blog-white: #ffffff;
+      --blog-shadow: 0 8px 30px rgba(20, 30, 40, 0.08);
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Grundgestaltung
+     * ------------------------------------------------------------
+     */
+
+    body {
+      background: var(--blog-bg) !important;
+    }
+
+    /*
+     * GitHub-Link im CMS ausblenden.
      */
 
     a[href*="github.com"] {
       display: none !important;
     }
 
-    /*
-     * Falls Decap den Link über einen Button rendert.
-     */
     button[aria-label*="GitHub"],
-    button[title*="GitHub"] {
+    button[aria-label*="github"],
+    button[title*="GitHub"],
+    button[title*="github"] {
       display: none !important;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Decap Header
+     * ------------------------------------------------------------
+     */
+
+    header {
+      border-bottom: 1px solid var(--blog-border) !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Buttons
+     * ------------------------------------------------------------
+     */
+
+    button {
+      border-radius: 9px !important;
+    }
+
+    /*
+     * Primäre Aktionen
+     */
+
+    button[type="submit"],
+    [class*="PublishButton"],
+    [class*="publishButton"] {
+      border-radius: 9px !important;
+      font-weight: 700 !important;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Karten und Panels
+     * ------------------------------------------------------------
+     */
+
+    [class*="Card"],
+    [class*="card"],
+    [class*="Panel"],
+    [class*="panel"] {
+      border-radius: 12px !important;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Eingabefelder
+     * ------------------------------------------------------------
+     */
+
+    input,
+    textarea,
+    select {
+      border-radius: 8px !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--blog-red) !important;
+      box-shadow: 0 0 0 2px rgba(215, 25, 32, 0.12) !important;
+      outline: none !important;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Links
+     * ------------------------------------------------------------
+     */
+
+    a {
+      color: inherit;
+    }
+
+    /*
+     * ------------------------------------------------------------
+     * Mobile
+     * ------------------------------------------------------------
+     */
+
+    @media (max-width: 700px) {
+      body {
+        font-size: 15px;
+      }
+
+      button {
+        min-height: 42px;
+      }
+
+      input,
+      textarea,
+      select {
+        font-size: 16px !important;
+      }
     }
   </style>
 </head>
@@ -32,9 +152,19 @@
 
   <script>
     /*
-     * GitHub-Links entfernen, sobald Decap-CMS
-     * seine Oberfläche geladen hat.
+     * ============================================================
+     * Eisenbahn-Blog CMS Erweiterungen
+     * ============================================================
      */
+
+    /*
+     * GitHub-Links entfernen.
+     *
+     * Decap erzeugt seine Oberfläche dynamisch.
+     * Deshalb wird regelmäßig geprüft, ob ein entsprechender
+     * Link hinzugekommen ist.
+     */
+
     function removeGitHubLinks() {
       document
         .querySelectorAll('a[href*="github.com"]')
@@ -48,7 +178,7 @@
           const text =
             (button.textContent || '').toLowerCase();
 
-          const label =
+          const aria =
             (button.getAttribute('aria-label') || '').toLowerCase();
 
           const title =
@@ -56,7 +186,7 @@
 
           if (
             text.includes('github') ||
-            label.includes('github') ||
+            aria.includes('github') ||
             title.includes('github')
           ) {
             button.remove();
@@ -64,27 +194,105 @@
         });
     }
 
+
     /*
-     * Decap wird dynamisch geladen.
-     * Deshalb beobachten wir Änderungen am DOM.
+     * ------------------------------------------------------------
+     * "Blog nutzen" optisch verbessern
+     * ------------------------------------------------------------
+     *
+     * Wir suchen nach Elementen mit entsprechendem Text.
      */
-    const observer = new MutationObserver(function () {
+
+    function styleBlogUseArea() {
+      document
+        .querySelectorAll('*')
+        .forEach(function (element) {
+
+          const text =
+            (element.textContent || '').trim();
+
+          if (
+            text === 'Blog nutzen' ||
+            text === 'Blog nutzen →'
+          ) {
+            element.style.fontWeight = '800';
+            element.style.borderRadius = '10px';
+          }
+        });
+    }
+
+
+    /*
+     * ------------------------------------------------------------
+     * "Änderungen" optisch verbessern
+     * ------------------------------------------------------------
+     */
+
+    function styleChangesArea() {
+      document
+        .querySelectorAll('*')
+        .forEach(function (element) {
+
+          const text =
+            (element.textContent || '').trim();
+
+          if (text === 'Änderungen') {
+            element.style.fontWeight = '800';
+          }
+        });
+    }
+
+
+    /*
+     * ------------------------------------------------------------
+     * Gesamte Oberfläche aktualisieren
+     * ------------------------------------------------------------
+     */
+
+    function improveCMS() {
       removeGitHubLinks();
-    });
+      styleBlogUseArea();
+      styleChangesArea();
+    }
 
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true
-    });
 
     /*
-     * Sofortiger erster Durchlauf.
+     * Decap CMS wird dynamisch aufgebaut.
+     *
+     * MutationObserver sorgt dafür, dass unsere Anpassungen
+     * auch nach Navigation innerhalb des CMS bestehen bleiben.
      */
-    removeGitHubLinks();
+
+    const observer = new MutationObserver(function () {
+      improveCMS();
+    });
+
+    observer.observe(
+      document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+
+
+    /*
+     * Erster Durchlauf
+     */
+
+    improveCMS();
   </script>
 
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!--
+    ============================================================
+    Decap CMS
+    ============================================================
+  -->
+
+  <script
+    src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js">
+  </script>
 
 </body>
 </html>
