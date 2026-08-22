@@ -4,7 +4,7 @@ backend:
   name: github
   repo: Eisenbahn-Blog/Nachrichten-Blog
   branch: main
-  base_url: "https://nachrichten-blog.leonardklinger9.workers.dev"
+  base_url: "https://nachrichten-blog.train-news.workers.dev"
 
 publish_mode: editorial_workflow
 
