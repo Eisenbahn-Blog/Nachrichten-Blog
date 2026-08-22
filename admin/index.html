@@ -23,34 +23,22 @@
       --eb-shadow: 0 8px 28px rgba(20, 30, 40, 0.08);
     }
 
-    /*
-     * ============================================================
-     * Grundgestaltung
-     * ============================================================
-     */
+    * {
+      box-sizing: border-box;
+    }
 
     body {
+      margin: 0;
       background: var(--eb-background) !important;
     }
 
-    /*
-     * GitHub-Link im Decap-CMS ausblenden.
-     */
-
-    a[href*="github.com"] {
-      display: none !important;
-    }
-
+    a[href*="github.com"],
     button[aria-label*="GitHub"],
     button[aria-label*="github"],
     button[title*="GitHub"],
     button[title*="github"] {
       display: none !important;
     }
-
-    /*
-     * Buttons etwas moderner gestalten.
-     */
 
     button {
       border-radius: 9px !important;
@@ -71,9 +59,7 @@
     }
 
     /*
-     * ============================================================
-     * Eigene Eisenbahn-Blog-Startseite
-     * ============================================================
+     * Eigene Redaktionsstartseite
      */
 
     #eisenbahn-blog-start {
@@ -94,7 +80,7 @@
     }
 
     /*
-     * Kopfbereich
+     * Willkommen
      */
 
     .eb-hero {
@@ -152,9 +138,39 @@
     }
 
     /*
-     * ============================================================
-     * Karten
-     * ============================================================
+     * CMS-Bereich
+     *
+     * Auf Desktop steht der redaktionelle Bereich zuerst.
+     * Die Informationskarten werden darunter angezeigt.
+     */
+
+    .eb-editor-info {
+      margin-bottom: 24px;
+    }
+
+    .eb-editor-card {
+      background: var(--eb-white);
+      border: 1px solid var(--eb-border);
+      border-radius: 16px;
+      box-shadow: var(--eb-shadow);
+      padding: 24px;
+    }
+
+    .eb-editor-card h2 {
+      margin: 0 0 8px;
+      color: var(--eb-dark);
+      font-size: 22px;
+    }
+
+    .eb-editor-card p {
+      margin: 0;
+      color: var(--eb-muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /*
+     * Informationskarten
      */
 
     .eb-grid {
@@ -212,14 +228,6 @@
       font-size: 15px;
     }
 
-    .eb-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    /*
-     * Listen
-     */
-
     .eb-list {
       list-style: none;
       margin: 18px 0 0;
@@ -255,10 +263,6 @@
       font-size: 12px;
       font-weight: 900;
     }
-
-    /*
-     * Änderungsstatus
-     */
 
     .eb-status-list {
       display: grid;
@@ -311,12 +315,6 @@
       background: var(--eb-green);
     }
 
-    /*
-     * ============================================================
-     * Redaktionshinweise
-     * ============================================================
-     */
-
     .eb-notice {
       background: var(--eb-white);
       border: 1px solid var(--eb-border);
@@ -356,12 +354,6 @@
       color: var(--eb-dark);
     }
 
-    /*
-     * ============================================================
-     * Hinweis für neue Autoren
-     * ============================================================
-     */
-
     .eb-author-box {
       background: #fff;
       border: 1px solid #e7e9eb;
@@ -384,12 +376,6 @@
       line-height: 1.55;
     }
 
-    /*
-     * ============================================================
-     * Footer
-     * ============================================================
-     */
-
     .eb-footer {
       text-align: center;
       color: var(--eb-muted);
@@ -399,12 +385,26 @@
     }
 
     /*
-     * ============================================================
-     * Mobile
-     * ============================================================
+     * Desktop:
+     * Der eigentliche Decap-Redaktionsbereich wird oberhalb
+     * der Informationsblöcke platziert.
+     */
+
+    #nc-root,
+    [class*="AppMain"],
+    [class*="app-main"],
+    main {
+      position: relative;
+    }
+
+    /*
+     * Mobile:
+     * Nur "Willkommen in der Redaktion" bleibt ganz oben.
+     * Der redaktionelle CMS-Bereich folgt danach.
      */
 
     @media (max-width: 800px) {
+
       #eisenbahn-blog-start {
         width: min(100% - 20px, 1180px);
         margin-top: 20px;
@@ -421,10 +421,12 @@
       .eb-hero {
         padding: 26px 22px;
         border-radius: 15px;
+        margin-bottom: 18px;
       }
 
       .eb-card,
-      .eb-notice {
+      .eb-notice,
+      .eb-editor-card {
         padding: 22px;
       }
 
@@ -440,16 +442,27 @@
 
   <!--
     ============================================================
-    Eigene Eisenbahn-Blog-Redaktionsinformationen
+    EIGENE EISENBAHN-BLOG-REDAKTIONSINFORMATIONEN
     ============================================================
   -->
 
   <section id="eisenbahn-blog-start">
 
-    <div class="eb-hero">
-      <div class="eb-kicker">Eisenbahn-Blog · Redaktion</div>
+    <!--
+      Dieser Block bleibt immer ganz oben.
+      Auf dem Handy ist dies der einzige Informationsblock,
+      der vor dem CMS steht.
+    -->
 
-      <h1>Willkommen in der Redaktion</h1>
+    <div class="eb-hero">
+
+      <div class="eb-kicker">
+        Eisenbahn-Blog · Redaktion
+      </div>
+
+      <h1>
+        Willkommen in der Redaktion
+      </h1>
 
       <p>
         Hier kannst du Beiträge für den Eisenbahn-Blog erstellen,
@@ -457,304 +470,345 @@
         deiner Rolle – veröffentlichen. Bitte arbeite sorgfältig
         und überprüfe Informationen vor der Veröffentlichung.
       </p>
-    </div>
-
-
-    <div class="eb-grid">
-
-      <!-- BLOG NUTZEN -->
-
-      <article class="eb-card">
-
-        <div class="eb-card-header">
-
-          <div class="eb-icon">🚆</div>
-
-          <div>
-            <h2>Blog nutzen</h2>
-
-            <div class="eb-card-subtitle">
-              Beiträge erstellen und bearbeiten
-            </div>
-          </div>
-
-        </div>
-
-        <p>
-          Über den Bereich <strong>Beiträge</strong> kannst du
-          neue Nachrichten für den Eisenbahn-Blog erstellen.
-          Dabei stehen dir verschiedene redaktionelle Felder
-          zur Verfügung.
-        </p>
-
-        <p>
-          Dazu gehören unter anderem Titel, Veröffentlichungsdatum,
-          Autor, Themen, Region, Titelbild, Bildnachweis,
-          Kurzbeschreibung und der eigentliche Beitragstext.
-        </p>
-
-        <ul class="eb-list">
-
-          <li>
-            <strong>Titel:</strong>
-            Eine klare und verständliche Überschrift verwenden.
-          </li>
-
-          <li>
-            <strong>Datum:</strong>
-            Das tatsächliche Veröffentlichungsdatum beziehungsweise
-            den vorgesehenen Zeitpunkt auswählen.
-          </li>
-
-          <li>
-            <strong>Autor:</strong>
-            Den korrekten Autor des Beitrags auswählen.
-          </li>
-
-          <li>
-            <strong>Themen:</strong>
-            Passende Kategorien auswählen, damit der Beitrag
-            später besser gefunden werden kann.
-          </li>
-
-          <li>
-            <strong>Region:</strong>
-            Das betroffene Bundesland oder die passende Region
-            angeben.
-          </li>
-
-          <li>
-            <strong>Bilder:</strong>
-            Titelbild, Bildunterschrift, Bildnachweis und
-            Alternativtext möglichst vollständig ausfüllen.
-          </li>
-
-          <li>
-            <strong>Eilmeldung:</strong>
-            Nur bei tatsächlich wichtigen und zeitkritischen
-            Nachrichten aktivieren.
-          </li>
-
-        </ul>
-
-        <div class="eb-author-box">
-
-          <strong>💡 Tipp für Autoren</strong>
-
-          <p>
-            Schreibe sachlich, verständlich und möglichst präzise.
-            Trenne bestätigte Informationen klar von Vermutungen
-            und kennzeichne relevante Quellen beziehungsweise
-            Bildnachweise.
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- ÄNDERUNGEN -->
-
-      <article class="eb-card">
-
-        <div class="eb-card-header">
-
-          <div class="eb-icon">📝</div>
-
-          <div>
-            <h2>Änderungen</h2>
-
-            <div class="eb-card-subtitle">
-              Entwürfe und Veröffentlichungen verwalten
-            </div>
-          </div>
-
-        </div>
-
-        <p>
-          Änderungen an Beiträgen werden im redaktionellen
-          Arbeitsablauf verwaltet. Dadurch können Beiträge
-          zunächst vorbereitet und anschließend geprüft werden,
-          bevor sie auf der Website erscheinen.
-        </p>
-
-        <p>
-          Je nach Benutzerrolle können unterschiedliche
-          Bearbeitungs- und Veröffentlichungsrechte zur Verfügung
-          stehen.
-        </p>
-
-        <div class="eb-status-list">
-
-          <div class="eb-status">
-
-            <div class="eb-status-dot"></div>
-
-            <div>
-              <strong>Entwurf</strong>
-
-              <span>
-                Der Beitrag wird noch bearbeitet und ist noch
-                nicht zur Veröffentlichung vorgesehen.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="eb-status">
-
-            <div class="eb-status-dot"></div>
-
-            <div>
-              <strong>In Prüfung</strong>
-
-              <span>
-                Der Beitrag wurde zur redaktionellen Prüfung
-                eingereicht.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="eb-status">
-
-            <div class="eb-status-dot"></div>
-
-            <div>
-              <strong>Bereit zur Veröffentlichung</strong>
-
-              <span>
-                Der Beitrag wurde geprüft und kann veröffentlicht
-                werden.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="eb-status">
-
-            <div class="eb-status-dot"></div>
-
-            <div>
-              <strong>Veröffentlicht</strong>
-
-              <span>
-                Der Beitrag wurde veröffentlicht und ist auf der
-                Website verfügbar.
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="eb-author-box">
-
-          <strong>🔎 Vor dem Veröffentlichen</strong>
-
-          <p>
-            Prüfe insbesondere Fakten, Schreibweise, Datum,
-            Autor, Kategorien, Bilder, Bildrechte und
-            Bildnachweise. Bei Eilmeldungen sollte außerdem
-            besonders auf die Aktualität der Informationen
-            geachtet werden.
-          </p>
-
-        </div>
-
-      </article>
 
     </div>
 
 
-    <!-- REDAKTIONSHINWEISE -->
+    <!--
+      Die folgenden Informationsblöcke stehen bewusst weiter unten.
+    -->
 
-    <section class="eb-notice">
+    <div id="eb-informationen">
 
-      <h2>📋 Redaktionshinweise</h2>
+      <div class="eb-grid">
 
-      <p class="eb-notice-intro">
-        Diese kurze Kontrolle hilft dabei, Beiträge vor der
-        Veröffentlichung vollständig und möglichst zuverlässig
-        vorzubereiten.
-      </p>
+        <!-- BLOG NUTZEN -->
 
-      <div class="eb-check-grid">
+        <article class="eb-card">
 
-        <div class="eb-check">
-          ✓ <strong>Fakten:</strong>
-          Sind alle wichtigen Angaben überprüft?
-        </div>
+          <div class="eb-card-header">
 
-        <div class="eb-check">
-          ✓ <strong>Quelle:</strong>
-          Ist nachvollziehbar, woher die Information stammt?
-        </div>
+            <div class="eb-icon">
+              🚆
+            </div>
 
-        <div class="eb-check">
-          ✓ <strong>Titel:</strong>
-          Beschreibt die Überschrift den Inhalt korrekt?
-        </div>
+            <div>
 
-        <div class="eb-check">
-          ✓ <strong>Datum:</strong>
-          Stimmen Datum und Uhrzeit?
-        </div>
+              <h2>
+                Blog nutzen
+              </h2>
 
-        <div class="eb-check">
-          ✓ <strong>Autor:</strong>
-          Ist der richtige Autor ausgewählt?
-        </div>
+              <div class="eb-card-subtitle">
+                Beiträge erstellen und bearbeiten
+              </div>
 
-        <div class="eb-check">
-          ✓ <strong>Kategorien:</strong>
-          Sind die passenden Themen ausgewählt?
-        </div>
+            </div>
 
-        <div class="eb-check">
-          ✓ <strong>Region:</strong>
-          Ist das richtige Bundesland beziehungsweise die
-          richtige Region angegeben?
-        </div>
+          </div>
 
-        <div class="eb-check">
-          ✓ <strong>Bilder:</strong>
-          Sind Bildunterschrift und Bildnachweis vorhanden?
-        </div>
+          <p>
+            Über den Bereich <strong>Beiträge</strong> kannst du
+            neue Nachrichten für den Eisenbahn-Blog erstellen.
+            Dabei stehen dir verschiedene redaktionelle Felder
+            zur Verfügung.
+          </p>
 
-        <div class="eb-check">
-          ✓ <strong>Alternativtext:</strong>
-          Ist das Bild auch für Menschen mit Sehbehinderung
-          verständlich beschrieben?
-        </div>
+          <p>
+            Dazu gehören unter anderem Titel,
+            Veröffentlichungsdatum, Autor, Themen, Region,
+            Titelbild, Bildnachweis, Kurzbeschreibung und
+            der eigentliche Beitragstext.
+          </p>
 
-        <div class="eb-check">
-          ✓ <strong>Eilmeldung:</strong>
-          Ist die Meldung tatsächlich dringend genug?
-        </div>
+          <ul class="eb-list">
+
+            <li>
+              <strong>Titel:</strong>
+              Eine klare und verständliche Überschrift verwenden.
+            </li>
+
+            <li>
+              <strong>Datum:</strong>
+              Das tatsächliche Veröffentlichungsdatum
+              beziehungsweise den vorgesehenen Zeitpunkt auswählen.
+            </li>
+
+            <li>
+              <strong>Autor:</strong>
+              Den korrekten Autor des Beitrags auswählen.
+            </li>
+
+            <li>
+              <strong>Themen:</strong>
+              Passende Kategorien auswählen, damit der Beitrag
+              später besser gefunden werden kann.
+            </li>
+
+            <li>
+              <strong>Region:</strong>
+              Das betroffene Bundesland oder die passende Region
+              angeben.
+            </li>
+
+            <li>
+              <strong>Bilder:</strong>
+              Titelbild, Bildunterschrift, Bildnachweis und
+              Alternativtext möglichst vollständig ausfüllen.
+            </li>
+
+            <li>
+              <strong>Eilmeldung:</strong>
+              Nur bei tatsächlich wichtigen und zeitkritischen
+              Nachrichten aktivieren.
+            </li>
+
+          </ul>
+
+          <div class="eb-author-box">
+
+            <strong>
+              💡 Tipp für Autoren
+            </strong>
+
+            <p>
+              Schreibe sachlich, verständlich und möglichst
+              präzise. Trenne bestätigte Informationen klar von
+              Vermutungen und kennzeichne relevante Quellen
+              beziehungsweise Bildnachweise.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- ÄNDERUNGEN -->
+
+        <article class="eb-card">
+
+          <div class="eb-card-header">
+
+            <div class="eb-icon">
+              📝
+            </div>
+
+            <div>
+
+              <h2>
+                Änderungen
+              </h2>
+
+              <div class="eb-card-subtitle">
+                Entwürfe und Veröffentlichungen verwalten
+              </div>
+
+            </div>
+
+          </div>
+
+          <p>
+            Änderungen an Beiträgen werden im redaktionellen
+            Arbeitsablauf verwaltet. Dadurch können Beiträge
+            zunächst vorbereitet und anschließend geprüft werden,
+            bevor sie auf der Website erscheinen.
+          </p>
+
+          <p>
+            Je nach Benutzerrolle können unterschiedliche
+            Bearbeitungs- und Veröffentlichungsrechte zur
+            Verfügung stehen.
+          </p>
+
+          <div class="eb-status-list">
+
+            <div class="eb-status">
+
+              <div class="eb-status-dot"></div>
+
+              <div>
+
+                <strong>
+                  Entwurf
+                </strong>
+
+                <span>
+                  Der Beitrag wird noch bearbeitet und ist noch
+                  nicht zur Veröffentlichung vorgesehen.
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="eb-status">
+
+              <div class="eb-status-dot"></div>
+
+              <div>
+
+                <strong>
+                  In Prüfung
+                </strong>
+
+                <span>
+                  Der Beitrag wurde zur redaktionellen Prüfung
+                  eingereicht.
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="eb-status">
+
+              <div class="eb-status-dot"></div>
+
+              <div>
+
+                <strong>
+                  Bereit zur Veröffentlichung
+                </strong>
+
+                <span>
+                  Der Beitrag wurde geprüft und kann veröffentlicht
+                  werden.
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="eb-status">
+
+              <div class="eb-status-dot"></div>
+
+              <div>
+
+                <strong>
+                  Veröffentlicht
+                </strong>
+
+                <span>
+                  Der Beitrag wurde veröffentlicht und ist auf der
+                  Website verfügbar.
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="eb-author-box">
+
+            <strong>
+              🔎 Vor dem Veröffentlichen
+            </strong>
+
+            <p>
+              Prüfe insbesondere Fakten, Schreibweise, Datum,
+              Autor, Kategorien, Bilder, Bildrechte und
+              Bildnachweise. Bei Eilmeldungen sollte außerdem
+              besonders auf die Aktualität der Informationen
+              geachtet werden.
+            </p>
+
+          </div>
+
+        </article>
 
       </div>
 
-    </section>
+
+      <!-- REDAKTIONSHINWEISE -->
+
+      <section class="eb-notice">
+
+        <h2>
+          📋 Redaktionshinweise
+        </h2>
+
+        <p class="eb-notice-intro">
+          Diese kurze Kontrolle hilft dabei, Beiträge vor der
+          Veröffentlichung vollständig und möglichst zuverlässig
+          vorzubereiten.
+        </p>
+
+        <div class="eb-check-grid">
+
+          <div class="eb-check">
+            ✓ <strong>Fakten:</strong>
+            Sind alle wichtigen Angaben überprüft?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Quelle:</strong>
+            Ist nachvollziehbar, woher die Information stammt?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Titel:</strong>
+            Beschreibt die Überschrift den Inhalt korrekt?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Datum:</strong>
+            Stimmen Datum und Uhrzeit?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Autor:</strong>
+            Ist der richtige Autor ausgewählt?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Kategorien:</strong>
+            Sind die passenden Themen ausgewählt?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Region:</strong>
+            Ist das richtige Bundesland beziehungsweise die
+            richtige Region angegeben?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Bilder:</strong>
+            Sind Bildunterschrift und Bildnachweis vorhanden?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Alternativtext:</strong>
+            Ist das Bild auch für Menschen mit Sehbehinderung
+            verständlich beschrieben?
+          </div>
+
+          <div class="eb-check">
+            ✓ <strong>Eilmeldung:</strong>
+            Ist die Meldung tatsächlich dringend genug?
+          </div>
+
+        </div>
+
+      </section>
 
 
-    <div class="eb-footer">
-      Eisenbahn-Blog · Redaktion · Bitte sorgfältig und
-      verantwortungsvoll veröffentlichen.
+      <div class="eb-footer">
+        Eisenbahn-Blog · Redaktion · Bitte sorgfältig und
+        verantwortungsvoll veröffentlichen.
+      </div>
+
     </div>
 
   </section>
 
 
   <script>
-    /*
-     * ============================================================
-     * Decap CMS
-     * ============================================================
-     */
 
     /*
-     * GitHub-Links entfernen.
+     * ============================================================
+     * GitHub-Elemente entfernen
+     * ============================================================
      */
 
     function removeGitHubLinks() {
@@ -787,17 +841,60 @@
           }
 
         });
+
     }
 
 
     /*
-     * Eigene Startseite sichtbar machen.
-     *
-     * Decap besitzt eine interne React-Oberfläche.
-     * Wir hängen unsere Informationsseite an den Body an.
+     * ============================================================
+     * CMS-Container erkennen
+     * ============================================================
      */
 
-    function showEisenbahnStart() {
+    function findCMSContainer() {
+
+      const selectors = [
+        '#nc-root',
+        '[class*="AppMain"]',
+        '[class*="app-main"]',
+        'main'
+      ];
+
+      for (const selector of selectors) {
+
+        const element =
+          document.querySelector(selector);
+
+        if (element) {
+          return element;
+        }
+
+      }
+
+      return null;
+    }
+
+
+    /*
+     * ============================================================
+     * Startseite platzieren
+     * ============================================================
+     *
+     * Desktop:
+     *
+     *   CMS / redaktioneller Bereich
+     *   Willkommen
+     *   weitere Informationen
+     *
+     * Mobile:
+     *
+     *   Willkommen
+     *   CMS / redaktioneller Bereich
+     *   weitere Informationen
+     *
+     */
+
+    function arrangeEisenbahnStart() {
 
       const start =
         document.getElementById('eisenbahn-blog-start');
@@ -806,40 +903,85 @@
         return;
       }
 
+      const cms =
+        findCMSContainer();
+
+      if (!cms) {
+        start.classList.add('visible');
+        return;
+      }
+
+      const width =
+        window.innerWidth;
+
       /*
-       * Die Startseite von Decap wird angezeigt,
-       * wenn kein bestimmter Eintrag geöffnet wurde.
-       *
-       * Wir zeigen unsere Informationen grundsätzlich
-       * oberhalb der CMS-Oberfläche.
+       * Desktop
        */
 
-      if (!start.classList.contains('visible')) {
-        start.classList.add('visible');
+      if (width > 800) {
+
+        if (
+          start.parentElement !== cms.parentElement ||
+          start.previousElementSibling !== cms
+        ) {
+
+          cms.parentNode.insertBefore(
+            start,
+            cms.nextSibling
+          );
+
+        }
+
       }
+
+      /*
+       * Mobile
+       */
+
+      else {
+
+        if (
+          start.parentElement !== document.body ||
+          start.nextElementSibling !== cms
+        ) {
+
+          document.body.insertBefore(
+            start,
+            cms
+          );
+
+        }
+
+      }
+
+      start.classList.add('visible');
 
     }
 
 
     /*
-     * Alle Anpassungen durchführen.
+     * ============================================================
+     * CMS verbessern
+     * ============================================================
      */
 
     function improveCMS() {
+
       removeGitHubLinks();
-      showEisenbahnStart();
+      arrangeEisenbahnStart();
+
     }
 
 
     /*
-     * Decap lädt seine Oberfläche dynamisch.
-     *
-     * Deshalb beobachten wir Änderungen am DOM.
+     * Decap lädt dynamisch.
      */
 
     const observer =
       new MutationObserver(function () {
+
         improveCMS();
+
       });
 
 
@@ -853,17 +995,27 @@
 
 
     /*
-     * Erster Durchlauf.
+     * Beim Start
      */
 
     improveCMS();
+
+
+    /*
+     * Bei Bildschirmgrößenänderung
+     */
+
+    window.addEventListener(
+      'resize',
+      arrangeEisenbahnStart
+    );
 
   </script>
 
 
   <!--
     ============================================================
-    Decap CMS
+    DECAP CMS
     ============================================================
   -->
 
