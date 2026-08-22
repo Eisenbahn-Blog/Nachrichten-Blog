@@ -1384,3 +1384,90 @@ footer {
     transition: none !important;
   }
 }
+
+/* ===== STARTSEITEN-HERO ===== */
+
+.hero {
+  min-height: 560px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.48) 45%, rgba(0,0,0,.18) 100%),
+    url("../images/IMG_7712.jpg") center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  color: #fff;
+  padding: 110px 0 100px;
+  width: min(1160px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.hero-content > * {
+  max-width: 760px;
+}
+
+.hero .eyebrow {
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 900;
+}
+
+.hero h1 {
+  font-size: clamp(46px, 6vw, 76px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  margin: 14px 0 20px;
+  max-width: 780px;
+}
+
+.hero p {
+  font-size: 19px;
+  line-height: 1.6;
+  max-width: 700px;
+  color: rgba(255,255,255,.92);
+  margin: 0;
+}
+
+.hero .button {
+  display: inline-block;
+  margin-top: 28px;
+  background: #d71920;
+  color: #fff;
+  padding: 13px 20px;
+  border-radius: 11px;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.hero .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.32);
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 520px;
+    background-position: center;
+  }
+
+  .hero-content {
+    padding: 90px 0 80px;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+}
+
+/* ===== ENDE STARTSEITEN-HERO ===== */
+
