@@ -5,6 +5,7 @@ author: Leonard Klinger
 categories:
   - ÖPNV
 region: Bayern
+image: /assets/uploads/img_7709.jpg
 caption: Symbolbild
 credit: "Foto: Leonard Klinger "
 breaking: true
