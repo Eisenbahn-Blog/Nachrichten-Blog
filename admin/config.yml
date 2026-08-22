@@ -17,36 +17,59 @@ collections:
 
   - name: "posts"
     label: "Beiträge"
+    label_singular: "Beitrag"
     folder: "_posts"
     create: true
+
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
+    preview_path: "Nachrichten-Blog/{{year}}/{{month}}/{{day}}/{{slug}}/"
+
+    summary: "{{title}} – {{author}}"
+
+    sortable_fields:
+      - field: "date"
+        label: "Datum"
+        direction: "Descending"
+      - field: "title"
+        label: "Titel"
+      - field: "author"
+        label: "Autor"
 
     fields:
 
       - label: "Titel"
         name: "title"
         widget: "string"
+        hint: "Überschrift des Beitrags"
 
       - label: "Veröffentlichungsdatum"
         name: "date"
         widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        date_format: "DD.MM.YYYY"
+        time_format: "HH:mm"
 
       - label: "Autor"
         name: "author"
         widget: "relation"
         collection: "authors"
-        search_fields: ["name"]
+        search_fields:
+          - "name"
         value_field: "name"
-        display_fields: ["name"]
+        display_fields:
+          - "name"
 
       - label: "Themen"
         name: "categories"
         widget: "relation"
         collection: "categories"
-        multiple: true
-        search_fields: ["name"]
+        search_fields:
+          - "name"
         value_field: "name"
-        display_fields: ["name"]
+        display_fields:
+          - "name"
+        multiple: true
 
       - label: "Bundesland / Region"
         name: "region"
@@ -74,6 +97,13 @@ collections:
           - "Schweiz"
           - "International"
 
+      - label: "Eilmeldung"
+        name: "breaking"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Nur für wichtige und zeitkritische Nachrichten verwenden."
+
       - label: "Titelbild"
         name: "image"
         widget: "image"
@@ -93,16 +123,13 @@ collections:
         name: "alt"
         widget: "string"
         required: false
-
-      - label: "Eilmeldung"
-        name: "breaking"
-        widget: "boolean"
-        default: false
+        hint: "Beschreibung des Bildes für Barrierefreiheit."
 
       - label: "Kurzbeschreibung"
         name: "excerpt"
         widget: "text"
         required: false
+        hint: "Kurze Zusammenfassung für Übersichten und Vorschauen."
 
       - label: "Bildergalerie"
         name: "gallery"
@@ -134,12 +161,15 @@ collections:
         name: "body"
         widget: "markdown"
 
-
   - name: "authors"
     label: "Autoren"
+    label_singular: "Autor"
     folder: "_authors"
     create: true
+
     slug: "{{slug}}"
+
+    summary: "{{name}}"
 
     fields:
 
@@ -157,12 +187,15 @@ collections:
         widget: "image"
         required: false
 
-
   - name: "categories"
     label: "Kategorien"
+    label_singular: "Kategorie"
     folder: "_categories"
     create: true
+
     slug: "{{slug}}"
+
+    summary: "{{name}}"
 
     fields:
 
@@ -179,3 +212,4 @@ collections:
         name: "icon"
         widget: "string"
         required: false
+        hint: "Optionales Symbol oder Emoji für die Kategorie."

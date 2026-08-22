@@ -1,5 +1,6 @@
 ---
 name: Leonard Klinger
+github: leonard566
 role: Chefredaktion
-bio: Betreiber und Chefredakteur von Eisenbahn-Blog.
+description: Betreiber und Chefredakteur von Eisenbahn-Blog.
 ---
