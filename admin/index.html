@@ -27,11 +27,20 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
       background: var(--eb-background) !important;
     }
 
+    /*
+     * GitHub-Links innerhalb des CMS ausblenden.
+     */
     a[href*="github.com"],
     button[aria-label*="GitHub"],
     button[aria-label*="github"],
@@ -59,13 +68,14 @@
     }
 
     /*
-     * Eigene Redaktionsstartseite
+     * ============================================================
+     * Eigene Redaktionsinformationen
+     * ============================================================
      */
 
-    #eisenbahn-blog-start {
-      display: none;
+    #eisenbahn-blog-info {
       width: min(1180px, calc(100% - 32px));
-      margin: 32px auto 48px;
+      margin: 28px auto 48px;
       color: var(--eb-text);
       font-family:
         system-ui,
@@ -75,12 +85,9 @@
         sans-serif;
     }
 
-    #eisenbahn-blog-start.visible {
-      display: block;
-    }
-
     /*
-     * Willkommen
+     * Desktop:
+     * Die Informationsseite befindet sich UNTERHALB des CMS.
      */
 
     .eb-hero {
@@ -89,8 +96,8 @@
       background:
         linear-gradient(
           135deg,
-          #b51218 0%,
-          #d71920 55%,
+          var(--eb-red-dark) 0%,
+          var(--eb-red) 55%,
           #e12b31 100%
         );
       color: white;
@@ -136,42 +143,6 @@
       line-height: 1.6;
       opacity: 0.95;
     }
-
-    /*
-     * CMS-Bereich
-     *
-     * Auf Desktop steht der redaktionelle Bereich zuerst.
-     * Die Informationskarten werden darunter angezeigt.
-     */
-
-    .eb-editor-info {
-      margin-bottom: 24px;
-    }
-
-    .eb-editor-card {
-      background: var(--eb-white);
-      border: 1px solid var(--eb-border);
-      border-radius: 16px;
-      box-shadow: var(--eb-shadow);
-      padding: 24px;
-    }
-
-    .eb-editor-card h2 {
-      margin: 0 0 8px;
-      color: var(--eb-dark);
-      font-size: 22px;
-    }
-
-    .eb-editor-card p {
-      margin: 0;
-      color: var(--eb-muted);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-
-    /*
-     * Informationskarten
-     */
 
     .eb-grid {
       display: grid;
@@ -226,6 +197,10 @@
       color: var(--eb-text);
       line-height: 1.6;
       font-size: 15px;
+    }
+
+    .eb-card p:last-child {
+      margin-bottom: 0;
     }
 
     .eb-list {
@@ -385,29 +360,21 @@
     }
 
     /*
-     * Desktop:
-     * Der eigentliche Decap-Redaktionsbereich wird oberhalb
-     * der Informationsblöcke platziert.
-     */
-
-    #nc-root,
-    [class*="AppMain"],
-    [class*="app-main"],
-    main {
-      position: relative;
-    }
-
-    /*
-     * Mobile:
-     * Nur "Willkommen in der Redaktion" bleibt ganz oben.
-     * Der redaktionelle CMS-Bereich folgt danach.
+     * ============================================================
+     * MOBILE
+     * ============================================================
+     *
+     * Auf kleinen Bildschirmen wird nur die Willkommensbox
+     * oberhalb des CMS angezeigt.
+     *
+     * Die restlichen Informationen wandern unter das CMS.
      */
 
     @media (max-width: 800px) {
 
-      #eisenbahn-blog-start {
-        width: min(100% - 20px, 1180px);
-        margin-top: 20px;
+      #eisenbahn-blog-info {
+        width: calc(100% - 20px);
+        margin: 16px auto 32px;
       }
 
       .eb-grid {
@@ -421,18 +388,62 @@
       .eb-hero {
         padding: 26px 22px;
         border-radius: 15px;
-        margin-bottom: 18px;
       }
 
       .eb-card,
-      .eb-notice,
-      .eb-editor-card {
+      .eb-notice {
         padding: 22px;
       }
 
       .eb-hero::after {
         right: 10px;
         font-size: 75px;
+      }
+
+      /*
+       * Auf Mobil wird der Informationsbereich in zwei Teile
+       * getrennt. Die Willkommensbox bleibt oben.
+       */
+
+      #eb-desktop-information {
+        display: none;
+      }
+
+      #eb-mobile-information {
+        display: block;
+      }
+    }
+
+    @media (min-width: 801px) {
+
+      #eb-mobile-information {
+        display: none;
+      }
+
+      #eb-desktop-information {
+        display: block;
+      }
+    }
+
+    /*
+     * Standardmäßig beide Varianten unsichtbar.
+     * JavaScript setzt die richtige Variante ein.
+     */
+
+    #eb-desktop-information,
+    #eb-mobile-information {
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+      #eb-mobile-information {
+        display: block;
+      }
+    }
+
+    @media (min-width: 801px) {
+      #eb-desktop-information {
+        display: block;
       }
     }
   </style>
@@ -442,43 +453,63 @@
 
   <!--
     ============================================================
-    EIGENE EISENBAHN-BLOG-REDAKTIONSINFORMATIONEN
+    MOBILE:
+    Nur die Willkommensbox wird oben angezeigt.
     ============================================================
   -->
 
-  <section id="eisenbahn-blog-start">
+  <section id="eb-mobile-information">
 
-    <!--
-      Dieser Block bleibt immer ganz oben.
-      Auf dem Handy ist dies der einzige Informationsblock,
-      der vor dem CMS steht.
-    -->
+    <div id="eisenbahn-blog-info">
 
-    <div class="eb-hero">
+      <div class="eb-hero">
+        <div class="eb-kicker">Eisenbahn-Blog · Redaktion</div>
 
-      <div class="eb-kicker">
-        Eisenbahn-Blog · Redaktion
+        <h1>Willkommen in der Redaktion</h1>
+
+        <p>
+          Hier kannst du Beiträge für den Eisenbahn-Blog erstellen,
+          bearbeiten, zur Prüfung einreichen und – abhängig von
+          deiner Rolle – veröffentlichen. Bitte arbeite sorgfältig
+          und überprüfe Informationen vor der Veröffentlichung.
+        </p>
       </div>
-
-      <h1>
-        Willkommen in der Redaktion
-      </h1>
-
-      <p>
-        Hier kannst du Beiträge für den Eisenbahn-Blog erstellen,
-        bearbeiten, zur Prüfung einreichen und – abhängig von
-        deiner Rolle – veröffentlichen. Bitte arbeite sorgfältig
-        und überprüfe Informationen vor der Veröffentlichung.
-      </p>
 
     </div>
 
+  </section>
 
-    <!--
-      Die folgenden Informationsblöcke stehen bewusst weiter unten.
-    -->
 
-    <div id="eb-informationen">
+  <!--
+    ============================================================
+    DESKTOP:
+    Die komplette Informationsseite wird nach dem CMS angezeigt.
+    ============================================================
+  -->
+
+  <section id="eb-desktop-information">
+
+    <div id="eisenbahn-blog-info">
+
+      <div class="eb-hero">
+
+        <div class="eb-kicker">
+          Eisenbahn-Blog · Redaktion
+        </div>
+
+        <h1>
+          Willkommen in der Redaktion
+        </h1>
+
+        <p>
+          Hier kannst du Beiträge für den Eisenbahn-Blog erstellen,
+          bearbeiten, zur Prüfung einreichen und – abhängig von
+          deiner Rolle – veröffentlichen. Bitte arbeite sorgfältig
+          und überprüfe Informationen vor der Veröffentlichung.
+        </p>
+
+      </div>
+
 
       <div class="eb-grid">
 
@@ -488,20 +519,14 @@
 
           <div class="eb-card-header">
 
-            <div class="eb-icon">
-              🚆
-            </div>
+            <div class="eb-icon">🚆</div>
 
             <div>
-
-              <h2>
-                Blog nutzen
-              </h2>
+              <h2>Blog nutzen</h2>
 
               <div class="eb-card-subtitle">
                 Beiträge erstellen und bearbeiten
               </div>
-
             </div>
 
           </div>
@@ -516,8 +541,8 @@
           <p>
             Dazu gehören unter anderem Titel,
             Veröffentlichungsdatum, Autor, Themen, Region,
-            Titelbild, Bildnachweis, Kurzbeschreibung und
-            der eigentliche Beitragstext.
+            Titelbild, Bildnachweis, Kurzbeschreibung und der
+            eigentliche Beitragstext.
           </p>
 
           <ul class="eb-list">
@@ -566,15 +591,13 @@
 
           <div class="eb-author-box">
 
-            <strong>
-              💡 Tipp für Autoren
-            </strong>
+            <strong>💡 Tipp für Autoren</strong>
 
             <p>
-              Schreibe sachlich, verständlich und möglichst
-              präzise. Trenne bestätigte Informationen klar von
-              Vermutungen und kennzeichne relevante Quellen
-              beziehungsweise Bildnachweise.
+              Schreibe sachlich, verständlich und möglichst präzise.
+              Trenne bestätigte Informationen klar von Vermutungen
+              und kennzeichne relevante Quellen beziehungsweise
+              Bildnachweise.
             </p>
 
           </div>
@@ -588,20 +611,14 @@
 
           <div class="eb-card-header">
 
-            <div class="eb-icon">
-              📝
-            </div>
+            <div class="eb-icon">📝</div>
 
             <div>
-
-              <h2>
-                Änderungen
-              </h2>
+              <h2>Änderungen</h2>
 
               <div class="eb-card-subtitle">
                 Entwürfe und Veröffentlichungen verwalten
               </div>
-
             </div>
 
           </div>
@@ -615,95 +632,61 @@
 
           <p>
             Je nach Benutzerrolle können unterschiedliche
-            Bearbeitungs- und Veröffentlichungsrechte zur
-            Verfügung stehen.
+            Bearbeitungs- und Veröffentlichungsrechte zur Verfügung
+            stehen.
           </p>
 
           <div class="eb-status-list">
 
             <div class="eb-status">
-
               <div class="eb-status-dot"></div>
-
               <div>
-
-                <strong>
-                  Entwurf
-                </strong>
-
+                <strong>Entwurf</strong>
                 <span>
                   Der Beitrag wird noch bearbeitet und ist noch
                   nicht zur Veröffentlichung vorgesehen.
                 </span>
-
               </div>
-
             </div>
 
             <div class="eb-status">
-
               <div class="eb-status-dot"></div>
-
               <div>
-
-                <strong>
-                  In Prüfung
-                </strong>
-
+                <strong>In Prüfung</strong>
                 <span>
                   Der Beitrag wurde zur redaktionellen Prüfung
                   eingereicht.
                 </span>
-
               </div>
-
             </div>
 
             <div class="eb-status">
-
               <div class="eb-status-dot"></div>
-
               <div>
-
-                <strong>
-                  Bereit zur Veröffentlichung
-                </strong>
-
+                <strong>Bereit zur Veröffentlichung</strong>
                 <span>
                   Der Beitrag wurde geprüft und kann veröffentlicht
                   werden.
                 </span>
-
               </div>
-
             </div>
 
             <div class="eb-status">
-
               <div class="eb-status-dot"></div>
-
               <div>
-
-                <strong>
-                  Veröffentlicht
-                </strong>
-
+                <strong>Veröffentlicht</strong>
                 <span>
                   Der Beitrag wurde veröffentlicht und ist auf der
                   Website verfügbar.
                 </span>
-
               </div>
-
             </div>
 
           </div>
 
           <div class="eb-author-box">
 
-            <strong>
-              🔎 Vor dem Veröffentlichen
-            </strong>
+            <strong>🔎 Vor dem Veröffentlichen</strong>
 
             <p>
               Prüfe insbesondere Fakten, Schreibweise, Datum,
@@ -724,9 +707,7 @@
 
       <section class="eb-notice">
 
-        <h2>
-          📋 Redaktionshinweise
-        </h2>
+        <h2>📋 Redaktionshinweise</h2>
 
         <p class="eb-notice-intro">
           Diese kurze Kontrolle hilft dabei, Beiträge vor der
@@ -803,15 +784,17 @@
   </section>
 
 
+  <!--
+    ============================================================
+    DECAP CMS
+    ============================================================
+  -->
+
   <script>
-
     /*
-     * ============================================================
-     * GitHub-Elemente entfernen
-     * ============================================================
+     * GitHub-Elemente aus der CMS-Oberfläche entfernen.
      */
-
-    function removeGitHubLinks() {
+    function removeGitHubElements() {
 
       document
         .querySelectorAll('a[href*="github.com"]')
@@ -841,152 +824,44 @@
           }
 
         });
-
     }
 
 
     /*
-     * ============================================================
-     * CMS-Container erkennen
-     * ============================================================
-     */
-
-    function findCMSContainer() {
-
-      const selectors = [
-        '#nc-root',
-        '[class*="AppMain"]',
-        '[class*="app-main"]',
-        'main'
-      ];
-
-      for (const selector of selectors) {
-
-        const element =
-          document.querySelector(selector);
-
-        if (element) {
-          return element;
-        }
-
-      }
-
-      return null;
-    }
-
-
-    /*
-     * ============================================================
-     * Startseite platzieren
-     * ============================================================
+     * CMS nicht verschieben!
      *
-     * Desktop:
+     * Das ist wichtig:
+     * Wir greifen NICHT in die Decap-React-Struktur ein.
      *
-     *   CMS / redaktioneller Bereich
-     *   Willkommen
-     *   weitere Informationen
+     * Dadurch bleiben:
      *
-     * Mobile:
+     * - Inhaltstypen
+     * - Beiträge
+     * - Autoren
+     * - Kategorien
+     * - Arbeitsablauf
      *
-     *   Willkommen
-     *   CMS / redaktioneller Bereich
-     *   weitere Informationen
-     *
-     */
-
-    function arrangeEisenbahnStart() {
-
-      const start =
-        document.getElementById('eisenbahn-blog-start');
-
-      if (!start) {
-        return;
-      }
-
-      const cms =
-        findCMSContainer();
-
-      if (!cms) {
-        start.classList.add('visible');
-        return;
-      }
-
-      const width =
-        window.innerWidth;
-
-      /*
-       * Desktop
-       */
-
-      if (width > 800) {
-
-        if (
-          start.parentElement !== cms.parentElement ||
-          start.previousElementSibling !== cms
-        ) {
-
-          cms.parentNode.insertBefore(
-            start,
-            cms.nextSibling
-          );
-
-        }
-
-      }
-
-      /*
-       * Mobile
-       */
-
-      else {
-
-        if (
-          start.parentElement !== document.body ||
-          start.nextElementSibling !== cms
-        ) {
-
-          document.body.insertBefore(
-            start,
-            cms
-          );
-
-        }
-
-      }
-
-      start.classList.add('visible');
-
-    }
-
-
-    /*
-     * ============================================================
-     * CMS verbessern
-     * ============================================================
+     * vollständig unter Kontrolle von Decap CMS.
      */
 
     function improveCMS() {
-
-      removeGitHubLinks();
-      arrangeEisenbahnStart();
-
+      removeGitHubElements();
     }
 
 
     /*
-     * Decap lädt dynamisch.
+     * Decap lädt Teile seiner Oberfläche dynamisch.
+     * Deshalb nur kleine, sichere DOM-Beobachtung.
      */
 
     const observer =
       new MutationObserver(function () {
-
-        improveCMS();
-
+        removeGitHubElements();
       });
 
 
     observer.observe(
-      document.documentElement,
+      document.body,
       {
         childList: true,
         subtree: true
@@ -994,30 +869,9 @@
     );
 
 
-    /*
-     * Beim Start
-     */
-
     improveCMS();
-
-
-    /*
-     * Bei Bildschirmgrößenänderung
-     */
-
-    window.addEventListener(
-      'resize',
-      arrangeEisenbahnStart
-    );
-
   </script>
 
-
-  <!--
-    ============================================================
-    DECAP CMS
-    ============================================================
-  -->
 
   <script
     src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js">
