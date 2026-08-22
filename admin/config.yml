@@ -2,7 +2,7 @@ locale: "de"
 
 backend:
   name: github
-  repo: leonard566/Nachrichten-Blog
+  repo: Eisenbahn-Blog/Nachrichten-Blog
   branch: main
   base_url: "https://nachrichten-blog.leonardklinger9.workers.dev"
 
