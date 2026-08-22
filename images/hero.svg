@@ -5,5 +5,5 @@
 <path d="M0 760 L1600 610" stroke="#d9dde0" stroke-width="8"/>
 <path d="M0 810 L1600 660" stroke="#d9dde0" stroke-width="8"/>
 <text x="100" y="160" font-family="Arial" font-size="76" font-weight="700" fill="white">Titelbild</text>
-<text x="100" y="235" font-family="Arial" font-size="38" fill="white">Baden-Württemberg</text>
+<text x="100" y="235" font-family="Arial" font-size="38" fill="white">Deutschland</text>
 </svg>

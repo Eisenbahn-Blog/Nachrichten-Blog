@@ -1,0 +1,155 @@
+locale: "de"
+
+backend:
+  name: github
+  repo: leonard566/Nachrichten-Blog
+  branch: main
+  base_url: "https://nachrichten-blog.leonardklinger9.workers.dev"
+
+publish_mode: editorial_workflow
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: "https://leonard566.github.io/Nachrichten-Blog"
+
+collections:
+
+  - name: "posts"
+    label: "Beiträge"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
+    fields:
+
+      - label: "Titel"
+        name: "title"
+        widget: "string"
+
+      - label: "Veröffentlichungsdatum"
+        name: "date"
+        widget: "datetime"
+
+      - label: "Autor"
+        name: "author"
+        widget: "relation"
+        collection: "authors"
+        search_fields: ["name"]
+        value_field: "name"
+        display_fields: ["name"]
+
+      - label: "Kategorien"
+        name: "categories"
+        widget: "relation"
+        collection: "categories"
+        multiple: true
+        search_fields: ["name"]
+        value_field: "name"
+        display_fields: ["name"]
+
+      - label: "Titelbild"
+        name: "image"
+        widget: "image"
+        required: false
+
+      - label: "Bildunterschrift"
+        name: "caption"
+        widget: "string"
+        required: false
+
+      - label: "Bildnachweis"
+        name: "credit"
+        widget: "string"
+        required: false
+
+      - label: "Alternativtext"
+        name: "alt"
+        widget: "string"
+        required: false
+
+      - label: "Eilmeldung"
+        name: "breaking"
+        widget: "boolean"
+        default: false
+
+      - label: "Kurzbeschreibung"
+        name: "excerpt"
+        widget: "text"
+        required: false
+
+      - label: "Bildergalerie"
+        name: "gallery"
+        widget: "list"
+        required: false
+
+        fields:
+
+          - label: "Bild"
+            name: "image"
+            widget: "image"
+
+          - label: "Bildunterschrift"
+            name: "caption"
+            widget: "string"
+            required: false
+
+          - label: "Bildnachweis"
+            name: "credit"
+            widget: "string"
+            required: false
+
+          - label: "Alternativtext"
+            name: "alt"
+            widget: "string"
+            required: false
+
+      - label: "Inhalt"
+        name: "body"
+        widget: "markdown"
+
+
+  - name: "authors"
+    label: "Autoren"
+    folder: "_authors"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+
+      - label: "Name"
+        name: "name"
+        widget: "string"
+
+      - label: "Beschreibung"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "Profilbild"
+        name: "image"
+        widget: "image"
+        required: false
+
+
+  - name: "categories"
+    label: "Kategorien"
+    folder: "_categories"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+
+      - label: "Name"
+        name: "name"
+        widget: "string"
+
+      - label: "Beschreibung"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "Symbol"
+        name: "icon"
+        widget: "string"
+        required: false

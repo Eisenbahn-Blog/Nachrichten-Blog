@@ -1,5 +1,5 @@
 ---
 name: Leonard Klinger
 role: Chefredaktion
-bio: Betreiber und Chefredakteur von Eisenbahn-News Baden-Württemberg.
+bio: Betreiber und Chefredakteur von Eisenbahn-Blog.
 ---

@@ -1,0 +1,31 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="{{ page.description | default: site.description }}"><title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title><link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"></head><body><div id="noticeOverlay" class="notice-overlay" role="dialog" aria-modal="true" aria-labelledby="noticeTitle" hidden>
+<div class="notice-card">
+
+<button id="noticeClose" class="notice-close" type="button" aria-label="Hinweis schließen" title="Schließen">×</button>
+
+<div class="notice-label">📰 Eisenbahn-News</div>
+
+<h2 id="noticeTitle">Willkommen bei Eisenbahn-News Baden-Württemberg</h2>
+
+<p>
+Schön, dass du da bist! Hier findest du aktuelle Meldungen,
+Baustellen, Fahrzeuge, Bahnhöfe und weitere Themen rund um
+Eisenbahn und ÖPNV in Baden-Württemberg.
+</p>
+
+<div class="notice-info">
+<div class="notice-info-icon">ℹ️</div>
+<div class="notice-info-text">
+Diese Website befindet sich noch im Aufbau.
+Inhalte und Funktionen werden laufend erweitert.
+</div>
+</div>
+
+<div class="notice-actions">
+<button id="noticeContinue" class="notice-button" type="button">
+Zur Website →
+</button>
+</div>
+
+</div>
+</div><header class="site-header"><div class="header-inner container"><a class="brand" href="{{ '/' | relative_url }}"><span class="brand-logo">🚆</span><span><strong>Eisenbahn-News</strong><small>Baden-Württemberg</small></span></a><button class="menu-button" id="menuButton" aria-label="Menü">☰</button><nav id="mainNav"><a href="{{ '/' | relative_url }}">Startseite</a><a href="{{ '/#meldungen' | relative_url }}">Meldungen</a><a href="{{ '/#kategorien' | relative_url }}">Kategorien</a><a href="{{ '/#ueber-mich' | relative_url }}">Über den Blog</a><a class="admin-link" href="{{ '/admin/#/' | relative_url }}">Redaktion</a></nav></div></header><main>{{ content }}</main><footer><div class="footer-main container"><div><div class="brand-mini">🚆</div><h3>Eisenbahn-News</h3><p>Baden-Württemberg</p><span>Nachrichten auf der Schiene.</span></div><div><h4>Navigation</h4><a href="{{ '/' | relative_url }}">Startseite</a><a href="{{ '/#meldungen' | relative_url }}">Meldungen</a><a href="{{ '/#kategorien' | relative_url }}">Kategorien</a></div><div><h4>Redaktion</h4><a href="{{ '/admin/#/' | relative_url }}">Redaktionsbereich</a><a href="{{ '/#ueber-mich' | relative_url }}">Über den Blog</a></div></div><div class="footer-bottom"><div class="container"><span>© {{ site.time | date: "%Y" }} Eisenbahn-News Baden-Württemberg</span><span>Git · Jekyll · GitHub Pages</span></div></div></footer><script src="{{ '/assets/js/menu.js' | relative_url }}"></script><script src="{{ '/assets/js/notice-card.js' | relative_url }}"></script></body></html>
