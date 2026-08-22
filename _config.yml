@@ -25,3 +25,22 @@ defaults:
       credit: ""
       alt: ""
       gallery: []
+
+exclude:
+  - .git/
+  - .github/
+  - .bundle/
+  - vendor/
+  - src/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - wrangler.toml
+  - wrangler.jsonc
+  - Gemfile
+  - Gemfile.lock
+  - "*.backup"
+  - "*.backup-*"
+  - "*.v2-backup"
+  - "*.swp"
