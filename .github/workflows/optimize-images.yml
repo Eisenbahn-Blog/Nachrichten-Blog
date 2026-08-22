@@ -1,0 +1,99 @@
+name: Bilder optimieren
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "assets/uploads/**"
+      - ".github/workflows/optimize-images.yml"
+    paths-ignore:
+      - "assets/uploads/optimized/**"
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: ImageMagick installieren
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Neue und geänderte Bilder optimieren
+        shell: bash
+        run: |
+          set -e
+
+          mkdir -p assets/uploads/optimized
+
+          changed_files=""
+
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            changed_files="$(git diff --name-only HEAD^ HEAD -- \
+              'assets/uploads/*.jpg' \
+              'assets/uploads/*.jpeg' \
+              'assets/uploads/*.JPG' \
+              'assets/uploads/*.JPEG' \
+              'assets/uploads/*.png' \
+              'assets/uploads/*.PNG' || true)"
+          fi
+
+          for file in $changed_files; do
+
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+
+            filename="$(basename "$file")"
+            name="${filename%.*}"
+
+            output="assets/uploads/optimized/${name}.webp"
+
+            echo "Optimiere: $file"
+            echo "       -> $output"
+
+            magick "$file" \
+              -resize "1600x1600>" \
+              -strip \
+              -quality 82 \
+              "$output"
+
+          done
+
+      - name: Optimierte Bilder prüfen
+        shell: bash
+        run: |
+          echo "===== Optimierte Bilder ====="
+
+          find assets/uploads/optimized \
+            -maxdepth 1 \
+            -type f \
+            -iname "*.webp" \
+            -printf "%f\n" |
+            sort
+
+      - name: Optimierte Bilder committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets/uploads/optimized/
+
+          if git diff --cached --quiet; then
+            echo "Keine neuen optimierten Bilder."
+            exit 0
+          fi
+
+          git commit -m "Bilder automatisch optimieren"
+          git push
