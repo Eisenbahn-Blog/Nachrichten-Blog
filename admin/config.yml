@@ -20,21 +20,8 @@ collections:
     label_singular: "Beitrag"
     folder: "_posts"
     create: true
-
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-
-    preview_path: "Nachrichten-Blog/{{year}}/{{month}}/{{day}}/{{slug}}/"
-
     summary: "{{title}} – {{author}}"
-
-    sortable_fields:
-      - field: "date"
-        label: "Datum"
-        direction: "Descending"
-      - field: "title"
-        label: "Titel"
-      - field: "author"
-        label: "Autor"
 
     fields:
 
@@ -46,7 +33,6 @@ collections:
       - label: "Veröffentlichungsdatum"
         name: "date"
         widget: "datetime"
-        format: "YYYY-MM-DDTHH:mm:ssZ"
         date_format: "DD.MM.YYYY"
         time_format: "HH:mm"
 
@@ -64,12 +50,12 @@ collections:
         name: "categories"
         widget: "relation"
         collection: "categories"
+        multiple: true
         search_fields:
           - "name"
         value_field: "name"
         display_fields:
           - "name"
-        multiple: true
 
       - label: "Bundesland / Region"
         name: "region"
@@ -135,7 +121,6 @@ collections:
         name: "gallery"
         widget: "list"
         required: false
-
         fields:
 
           - label: "Bild"
@@ -166,9 +151,7 @@ collections:
     label_singular: "Autor"
     folder: "_authors"
     create: true
-
     slug: "{{slug}}"
-
     summary: "{{name}}"
 
     fields:
@@ -176,6 +159,19 @@ collections:
       - label: "Name"
         name: "name"
         widget: "string"
+
+      - label: "GitHub Benutzername"
+        name: "github"
+        widget: "string"
+        required: false
+
+      - label: "Rolle"
+        name: "role"
+        widget: "select"
+        options:
+          - "Chefredaktion"
+          - "Redaktion"
+          - "Autor"
 
       - label: "Beschreibung"
         name: "description"
@@ -192,9 +188,7 @@ collections:
     label_singular: "Kategorie"
     folder: "_categories"
     create: true
-
     slug: "{{slug}}"
-
     summary: "{{name}}"
 
     fields:
