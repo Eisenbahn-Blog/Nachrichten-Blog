@@ -10,6 +10,15 @@ interface Env {
 const GITHUB_SITE = 'https://eisenbahn-blog.github.io';
 const GITHUB_BASE = '/Nachrichten-Blog';
 
+function randomHex(length: number): string {
+    const bytes = new Uint8Array(length);
+    crypto.getRandomValues(bytes);
+
+    return Array.from(bytes)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
+}
+
 function escapeHtml(value: string): string {
     return value
         .replace(/&/g, '&amp;')
@@ -205,6 +214,14 @@ function loginPage(error = ''): Response {
 }
 
 const createOAuth = (env: Env) => {
+    if (!env.GITHUB_OAUTH_ID) {
+        throw new Error('GITHUB_OAUTH_ID fehlt.');
+    }
+
+    if (!env.GITHUB_OAUTH_SECRET) {
+        throw new Error('GITHUB_OAUTH_SECRET fehlt.');
+    }
+
     return new OAuthClient({
         id: env.GITHUB_OAUTH_ID,
         secret: env.GITHUB_OAUTH_SECRET,
@@ -465,6 +482,19 @@ export default {
     ): Promise<Response> {
         const url = new URL(request.url);
 
+        if (url.pathname === '/worker-test') {
+            return new Response(
+                'WORKER_OK_VERSION_2026-08-23',
+                {
+                    status: 200,
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Cache-Control': 'no-store',
+                    },
+                }
+            );
+        }
+
         /*
          * Decap CMS OAuth darf den Zugangsschutz
          * passieren.
@@ -537,16 +567,14 @@ export default {
         }
 
         /*
-         * Decap CMS:
+         * Decap CMS
          *
-         * Die CMS-Dateien kommen direkt aus den Worker-Assets.
-         * Dadurch wird garantiert die aktuelle lokale
-         * _site/admin-Version verwendet und nicht die alte
-         * Version von GitHub Pages.
+         * Die CMS-Dateien werden direkt aus den Worker-Assets
+         * unter /admin/ ausgeliefert.
          */
         if (
-            url.pathname === '/Nachrichten-Blog/admin' ||
-            url.pathname === '/Nachrichten-Blog/admin/'
+            url.pathname === '/admin' ||
+            url.pathname === '/admin/'
         ) {
             const assetUrl = new URL(request.url);
             assetUrl.pathname = '/admin/';
@@ -556,18 +584,9 @@ export default {
             );
         }
 
-        if (
-            url.pathname.startsWith('/Nachrichten-Blog/admin/')
-        ) {
-            const assetUrl = new URL(request.url);
-            assetUrl.pathname =
-                url.pathname.replace(
-                    '/Nachrichten-Blog',
-                    ''
-                );
-
+        if (url.pathname.startsWith('/admin/')) {
             return env.ASSETS.fetch(
-                new Request(assetUrl.toString(), request)
+                new Request(request)
             );
         }
 
