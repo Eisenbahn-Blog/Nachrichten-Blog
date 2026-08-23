@@ -1,7 +1,20 @@
 ---
 layout: default
 title: Änderungen
-description: Neuerungen und Verbesserungen am Eisenbahn-Blog.
+description: >-
+  Änderungen
+
+  Der Eisenbahn-Blog wird regelmäßig verbessert. 🔧
+
+  Hier informieren wir über neue Funktionen, Änderungen am Design und andere Neuerungen.
+
+  Du hast einen Fehler gefunden oder eine Idee?
+
+  Dann sag uns gerne Bescheid! 🙂
+footer:
+  title: Alle Änderungen
+  text: Es gab bisher viele Änderungen. In Zukunft informieren wir hier.
+  button_text: ""
 ---
 
 <section class="page-header">
