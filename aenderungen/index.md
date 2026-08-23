@@ -11,6 +11,11 @@ description: >-
   Du hast einen Fehler gefunden oder eine Idee?
 
   Dann sag uns gerne Bescheid! 🙂
+changes:
+  - date: 23. August 2026
+    icon: 🎨
+    title: Farben verbessert
+    text: Alle Farben wurden verbessert.
 footer:
   title: Alle Änderungen
   text: Es gab bisher viele Änderungen. In Zukunft informieren wir hier.
