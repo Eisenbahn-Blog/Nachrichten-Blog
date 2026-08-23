@@ -430,25 +430,7 @@ img {
   white-space: nowrap;
 }
 
-.breaking small::after {
-  content: "→";
 
-  width: 23px;
-  height: 23px;
-
-  display: inline-grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  background: #f5ded5;
-
-  font-size: 14px;
-
-  transition:
-    transform .2s ease,
-    background .2s ease;
-}
 
 .breaking:hover small::after {
   transform: translateX(3px);
@@ -609,33 +591,7 @@ img {
   font-weight: 850;
 }
 
-.read-more::after {
-  content: "→";
 
-  width: 24px;
-  height: 24px;
-
-  display: inline-grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  background: #f5e5dc;
-
-  font-size: 14px;
-  line-height: 1;
-
-  transition:
-    transform .2s ease,
-    background .2s ease,
-    color .2s ease;
-}
-
-.read-more:hover::after {
-  transform: translateX(3px);
-  background: var(--red);
-  color: #fff;
-}
 
 /* =========================================
    KATEGORIEN
@@ -1785,3 +1741,141 @@ main > ol {
     width: min(calc(100% - 28px), var(--container));
   }
 }
+
+/* =========================================
+   DESIGN-FEINSCHLIFF
+========================================= */
+
+/* Navigation */
+#mainNav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#mainNav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 11px;
+  border-radius: 9px;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+#mainNav a:hover {
+  background: #f3e9e3;
+}
+
+#mainNav .admin-link {
+  margin-left: 4px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 800;
+}
+
+#mainNav .admin-link:hover {
+  background: var(--red-dark);
+  color: #fff;
+}
+
+/* Footer übersichtlicher */
+.footer-main {
+  gap: 40px;
+}
+
+.footer-main a {
+  padding: 4px 0;
+  margin: 2px 0;
+  text-decoration: none;
+}
+
+.footer-main a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+
+  #mainNav {
+    gap: 3px;
+  }
+
+  #mainNav a {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  #mainNav .admin-link {
+    margin: 6px 0 0;
+    text-align: center;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 38px;
+    padding-bottom: 35px;
+  }
+
+  .footer-bottom .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* Keine zusätzlichen Pfeile */
+.read-more:hover::before,
+
+
+/* Schlichte Pfeile für Aktionslinks */
+.read-more {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.read-more::after {
+  content: "›";
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
+  transition: transform .18s ease;
+}
+
+.read-more:hover::after {
+  transform: translateX(3px);
+}
+
+/* Navigation: niemals automatisch Pfeile anhängen */
+#mainNav a::before,
+#mainNav a::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* Blog-nutzen-Karten: keine automatischen Zusatzpfeile */
+.feature-card a::before,
+.feature-card a::after {
+  content: none !important;
+  display: none !important;
+}
+

@@ -60,9 +60,6 @@ participate:
 
     {{ page.tip.text | markdownify }}
 
-    <a class="button" href="{{ '/' | relative_url }}">
-      Zur Startseite →
-    </a>
   </div>
 
 </section>
@@ -78,9 +75,6 @@ participate:
 
     {{ page.participate.text | markdownify }}
 
-    <a class="button" href="{{ '/admin/#/' | relative_url }}">
-      Zum Redaktionsbereich →
-    </a>
   </div>
 
 </section>
