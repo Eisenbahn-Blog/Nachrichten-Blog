@@ -1752,3 +1752,36 @@ main {
   }
 
 }
+
+/* Nutzungsbedingungen */
+main > h1,
+main > h2,
+main > h3,
+main > p,
+main > ul,
+main > ol {
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main > h1 {
+  padding-top: 35px;
+}
+
+main > p,
+main > ul,
+main > ol {
+  line-height: 1.7;
+}
+
+@media (max-width: 850px) {
+  main > h1,
+  main > h2,
+  main > h3,
+  main > p,
+  main > ul,
+  main > ol {
+    width: min(calc(100% - 28px), var(--container));
+  }
+}
