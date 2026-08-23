@@ -5,15 +5,20 @@ backend:
   repo: Eisenbahn-Blog/Nachrichten-Blog
   branch: main
   base_url: "https://nachrichten-blog.train-news.workers.dev"
+  auth_endpoint: "/auth"
 
 publish_mode: editorial_workflow
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: "https://leonard566.github.io/Nachrichten-Blog"
+site_url: "https://eisenbahn-blog.github.io/Nachrichten-Blog"
 
 collections:
+
+  # =========================================================
+  # BEITRÄGE
+  # =========================================================
 
   - name: "posts"
     label: "Beiträge"
@@ -21,20 +26,44 @@ collections:
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{title}} – {{author}}"
+    summary: "{{title}} · {{date}}"
 
     fields:
+
+      # =======================================================
+      # GRUNDDATEN
+      # =======================================================
 
       - label: "Titel"
         name: "title"
         widget: "string"
-        hint: "Überschrift des Beitrags"
+        hint: "Überschrift des Nachrichtenartikels."
+        pattern:
+          - ".{5,}"
+          - "Der Titel muss mindestens 5 Zeichen lang sein."
+
+      - label: "Kurzbeschreibung"
+        name: "excerpt"
+        widget: "text"
+        required: false
+        hint: "Kurze Zusammenfassung für Startseite und Vorschauen."
+
+      # =======================================================
+      # VERÖFFENTLICHUNG
+      # =======================================================
 
       - label: "Veröffentlichungsdatum"
         name: "date"
         widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ssZ"
         date_format: "DD.MM.YYYY"
         time_format: "HH:mm"
+        default: ""
+        hint: "Datum und Uhrzeit der Veröffentlichung."
+
+      # =======================================================
+      # EINORDNUNG
+      # =======================================================
 
       - label: "Autor"
         name: "author"
@@ -42,22 +71,28 @@ collections:
         collection: "authors"
         search_fields:
           - "name"
+          - "github"
         value_field: "name"
         display_fields:
           - "name"
+          - "role"
+        hint: "Autor des Beitrags auswählen."
 
-      - label: "Themen"
+      - label: "Kategorien"
         name: "categories"
         widget: "relation"
         collection: "categories"
         multiple: true
         search_fields:
           - "name"
+          - "description"
         value_field: "name"
         display_fields:
+          - "icon"
           - "name"
+        hint: "Eine oder mehrere passende Kategorien auswählen."
 
-      - label: "Bundesland / Region"
+      - label: "Region"
         name: "region"
         widget: "select"
         required: false
@@ -82,69 +117,346 @@ collections:
           - "Österreich"
           - "Schweiz"
           - "International"
+        hint: "Region des Ereignisses oder der Meldung."
+
+      # =======================================================
+      # EILMELDUNG
+      # =======================================================
 
       - label: "Eilmeldung"
         name: "breaking"
         widget: "boolean"
         default: false
         required: false
-        hint: "Nur für wichtige und zeitkritische Nachrichten verwenden."
+        hint: "Nur bei wichtigen und zeitkritischen Meldungen aktivieren."
+
+      # =======================================================
+      # TITELBILD
+      # =======================================================
 
       - label: "Titelbild"
         name: "image"
         widget: "image"
         required: false
+        choose_url: false
+        hint: "Hauptbild des Beitrags. Empfohlen: Querformat."
 
       - label: "Bildunterschrift"
         name: "caption"
         widget: "string"
         required: false
+        hint: "Optionaler Text unter dem Titelbild."
 
       - label: "Bildnachweis"
         name: "credit"
         widget: "string"
         required: false
+        hint: "Zum Beispiel: Foto: Max Mustermann."
 
       - label: "Alternativtext"
         name: "alt"
         widget: "string"
         required: false
-        hint: "Beschreibung des Bildes für Barrierefreiheit."
+        hint: "Kurze sachliche Beschreibung des Bildes für Barrierefreiheit."
 
-      - label: "Kurzbeschreibung"
-        name: "excerpt"
-        widget: "text"
-        required: false
-        hint: "Kurze Zusammenfassung für Übersichten und Vorschauen."
+      # =======================================================
+      # ARTIKELINHALT
+      # =======================================================
+
+      - label: "Artikelinhalt"
+        name: "body"
+        widget: "markdown"
+        hint: "Hier den eigentlichen Nachrichtenartikel schreiben."
+        buttons:
+          - bold
+          - italic
+          - code
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+        editor_components:
+          - image
+        modes:
+          - rich_text
+          - raw
+
+      # =======================================================
+      # GALERIE
+      # =======================================================
 
       - label: "Bildergalerie"
         name: "gallery"
         widget: "list"
         required: false
+        collapsed: true
+        minimize_collapsed: true
+        label_singular: "Galeriebild"
+        summary: "{{fields.caption}}"
+        hint: "Optional: zusätzliche Bilder zum Beitrag."
+
         fields:
 
           - label: "Bild"
             name: "image"
             widget: "image"
+            choose_url: false
+            hint: "Bild für die Galerie auswählen."
 
           - label: "Bildunterschrift"
             name: "caption"
             widget: "string"
             required: false
+            hint: "Optionaler Text unter dem Bild."
 
           - label: "Bildnachweis"
             name: "credit"
             widget: "string"
             required: false
+            hint: "Zum Beispiel: Foto: Max Mustermann."
 
           - label: "Alternativtext"
             name: "alt"
             widget: "string"
             required: false
+            hint: "Kurze Beschreibung des Bildes für Barrierefreiheit."
 
-      - label: "Inhalt"
-        name: "body"
-        widget: "markdown"
+  # =========================================================
+  # SEITEN
+  # =========================================================
+
+  - name: "pages"
+    label: "Seiten"
+    label_singular: "Seite"
+    files:
+
+      # -----------------------------------------------------
+      # BLOG NUTZEN
+      # -----------------------------------------------------
+
+      - name: "nutzen"
+        label: "Blog nutzen"
+        file: "nutzen/index.md"
+        fields:
+
+          - label: "Titel"
+            name: "title"
+            widget: "string"
+
+          - label: "Beschreibung"
+            name: "description"
+            widget: "text"
+            required: false
+
+          - label: "Einleitung"
+            name: "intro"
+            widget: "text"
+            required: false
+
+          - label: "Funktionskarten"
+            name: "features"
+            widget: "list"
+            required: false
+            collapsed: true
+            label_singular: "Funktionskarte"
+            summary: "{{fields.icon}} {{fields.title}}"
+
+            fields:
+
+              - label: "Symbol"
+                name: "icon"
+                widget: "string"
+                required: false
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Text"
+                name: "text"
+                widget: "text"
+
+              - label: "Als Eilmeldung hervorheben"
+                name: "alert"
+                widget: "boolean"
+                default: false
+                required: false
+
+          - label: "Tipp"
+            name: "tip"
+            widget: "object"
+            collapsed: true
+            fields:
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Text"
+                name: "text"
+                widget: "markdown"
+
+          - label: "Mitmachen"
+            name: "participate"
+            widget: "object"
+            collapsed: true
+            fields:
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Text"
+                name: "text"
+                widget: "markdown"
+
+      # -----------------------------------------------------
+      # ÄNDERUNGEN
+      # -----------------------------------------------------
+
+      - name: "aenderungen"
+        label: "Änderungen"
+        file: "aenderungen/index.md"
+        fields:
+
+          - label: "Titel"
+            name: "title"
+            widget: "string"
+
+          - label: "Beschreibung"
+            name: "description"
+            widget: "text"
+            required: false
+
+          - label: "Einleitung"
+            name: "intro"
+            widget: "text"
+            required: false
+
+          - label: "Änderungen"
+            name: "changes"
+            widget: "list"
+            required: false
+            collapsed: true
+            minimize_collapsed: true
+            label_singular: "Änderung"
+            summary: "{{fields.icon}} {{fields.date}} – {{fields.title}}"
+
+            fields:
+
+              - label: "Datum"
+                name: "date"
+                widget: "string"
+
+              - label: "Symbol"
+                name: "icon"
+                widget: "string"
+                required: false
+                hint: "Zum Beispiel 🚆, 🎨, 📰 oder 👥."
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Beschreibung"
+                name: "text"
+                widget: "text"
+                required: false
+
+              - label: "Aufzählung"
+                name: "items"
+                widget: "list"
+                required: false
+                collapsed: true
+                label_singular: "Punkt"
+
+          - label: "Abschlussbereich"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+                required: false
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Text"
+                name: "text"
+                widget: "markdown"
+
+              - label: "Buttontext"
+                name: "button_text"
+                widget: "string"
+                required: false
+                default: "Zu den Meldungen →"
+
+      # -----------------------------------------------------
+      # KONTAKT
+      # -----------------------------------------------------
+
+      - name: "kontakt"
+        label: "Kontakt"
+        file: "kontakt/index.md"
+        fields:
+
+          - label: "Titel"
+            name: "title"
+            widget: "string"
+
+          - label: "Beschreibung"
+            name: "description"
+            widget: "text"
+            required: false
+
+          - label: "Einleitung"
+            name: "intro"
+            widget: "text"
+            required: false
+
+          - label: "Kontaktbereich"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+            fields:
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Inhalt"
+                name: "body"
+                widget: "markdown"
+
+          - label: "Hinweise zu Beiträgen"
+            name: "notes"
+            widget: "object"
+            collapsed: true
+            fields:
+
+              - label: "Überschrift"
+                name: "title"
+                widget: "string"
+
+              - label: "Inhalt"
+                name: "body"
+                widget: "markdown"
+
+          - label: "Weitere Kontaktinformationen"
+            name: "additional"
+            widget: "markdown"
+            required: false
+
+  # =========================================================
+  # AUTOREN
+  # =========================================================
 
   - name: "authors"
     label: "Autoren"
@@ -152,36 +464,45 @@ collections:
     folder: "_authors"
     create: true
     slug: "{{slug}}"
-    summary: "{{name}}"
+    summary: "{{name}} · {{role}}"
 
     fields:
 
       - label: "Name"
         name: "name"
         widget: "string"
-
-      - label: "GitHub Benutzername"
-        name: "github"
-        widget: "string"
-        required: false
+        hint: "Vor- und Nachname oder gewünschter Autorenname."
 
       - label: "Rolle"
         name: "role"
         widget: "select"
         options:
-          - "Chefredaktion"
           - "Redaktion"
           - "Autor"
+        default: "Autor"
 
-      - label: "Beschreibung"
+      - label: "Kurzbeschreibung"
         name: "description"
         widget: "text"
         required: false
+        hint: "Kurze Beschreibung des Autors oder seiner Tätigkeit."
+
+      - label: "GitHub-Benutzername"
+        name: "github"
+        widget: "string"
+        required: false
+        hint: "Optional. Nur den GitHub-Benutzernamen eintragen."
 
       - label: "Profilbild"
         name: "image"
         widget: "image"
         required: false
+        choose_url: false
+        hint: "Optionales Bild für die Autorenanzeige."
+
+  # =========================================================
+  # KATEGORIEN
+  # =========================================================
 
   - name: "categories"
     label: "Kategorien"
@@ -189,21 +510,23 @@ collections:
     folder: "_categories"
     create: true
     slug: "{{slug}}"
-    summary: "{{name}}"
+    summary: "{{fields.icon}} {{fields.name}}"
 
     fields:
 
       - label: "Name"
         name: "name"
         widget: "string"
+        hint: "Name der Kategorie, zum Beispiel Eisenbahn oder ÖPNV."
 
       - label: "Beschreibung"
         name: "description"
         widget: "text"
         required: false
+        hint: "Kurze Beschreibung, welche Beiträge hier eingeordnet werden."
 
       - label: "Symbol"
         name: "icon"
         widget: "string"
         required: false
-        hint: "Optionales Symbol oder Emoji für die Kategorie."
+        hint: "Optionales Symbol, zum Beispiel 🚆, 🚊, 🏗️ oder 📍."

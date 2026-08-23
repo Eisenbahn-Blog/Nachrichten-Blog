@@ -1,5 +1,5 @@
 ---
-name: Eisenbahn
-description: Nachrichten rund um den Fernverkehr.
-icon: 🚆
+name: Fernverkehr
+description: ICE, IC, EC und internationaler Fernverkehr.
+icon: 🚄
 ---

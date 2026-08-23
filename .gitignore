@@ -7,3 +7,17 @@ vendor/bundle/
 Gemfile.lock
 
 *.v2-backup
+
+# Cloudflare / Wrangler
+.wrangler/
+.dev.vars
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lokale Build-/Tool-Dateien
+*.swp
+*.swo

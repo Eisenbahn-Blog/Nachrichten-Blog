@@ -7,38 +7,45 @@ description: Kontakt zum Eisenbahn-Blog.
 <section class="page-header">
   <div class="container">
     <span class="eyebrow">Kontakt</span>
-    <h1>Kontakt</h1>
-    <p>Du möchtest mit dem Eisenbahn-Blog Kontakt aufnehmen?</p>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
   </div>
 </section>
 
 <section class="container page-content">
 
-  <h2>Schreib uns</h2>
-
-  <p>
-    Für Fragen, Hinweise, Korrekturen oder Anregungen kannst du
-    mit der Redaktion Kontakt aufnehmen.
+  {% if page.intro %}
+  <p class="page-intro">
+    {{ page.intro }}
   </p>
+  {% endif %}
 
+  {% if page.contact %}
   <div class="contact-box">
-    <h3>Redaktion</h3>
-    <p>
-      Eisenbahn-Blog<br>
-      Deutschland
-    </p>
 
-    <p>
-      Die Kontaktdaten werden hier ergänzt.
-    </p>
+    <h2>{{ page.contact.title }}</h2>
+
+    {{ page.contact.body | markdownify }}
+
   </div>
+  {% endif %}
 
-  <h2>Hinweise zu Beiträgen</h2>
+  {% if page.notes %}
+  <section class="contact-notes">
 
-  <p>
-    Wenn dir bei einem Beitrag ein Fehler auffällt oder du zusätzliche
-    Informationen hast, kannst du uns diese ebenfalls über den
-    vorgesehenen Kontaktweg mitteilen.
-  </p>
+    <h2>{{ page.notes.title }}</h2>
+
+    {{ page.notes.body | markdownify }}
+
+  </section>
+  {% endif %}
+
+  {% if page.additional %}
+  <section class="contact-additional">
+
+    {{ page.additional | markdownify }}
+
+  </section>
+  {% endif %}
 
 </section>

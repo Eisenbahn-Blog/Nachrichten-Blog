@@ -518,43 +518,33 @@ img {
 
 .post-image {
   position: relative;
-
   display: block;
-
   aspect-ratio: 16 / 9;
-
   overflow: hidden;
-
   background: var(--surface-warm);
 }
 
 .post-image::after {
   content: "";
-
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-
   height: 4px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--red),
-      var(--orange),
-      var(--yellow)
-    );
-
+  background: linear-gradient(
+    90deg,
+    var(--red),
+    var(--orange),
+    var(--yellow)
+  );
   opacity: .9;
 }
 
 .post-image img {
+  display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
   transition: transform .45s ease;
 }
 
@@ -717,12 +707,22 @@ img {
 .article-hero {
   position: relative;
   overflow: hidden;
+  background: var(--surface-warm);
 }
 
-.article-hero > img {
-  width: 100%;
-  max-height: 610px;
+.article-hero picture {
+  display: block;
+  width: min(100%, 1100px);
+  height: min(520px, 58vw);
+  min-height: 280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
 
+.article-hero picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -940,7 +940,10 @@ img {
 }
 
 .gallery-item img {
+  display: block;
   width: 100%;
+  height: 240px;
+  object-fit: cover;
 }
 
 .gallery-item figcaption {
@@ -1702,6 +1705,39 @@ main {
 
   .change-content {
     padding: 22px 20px;
+  }
+
+}
+
+/* =========================================
+   BILDER – RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .post-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .article-hero picture {
+    width: 100%;
+    height: 58vw;
+    min-height: 220px;
+    max-height: 380px;
+  }
+
+  .article-hero picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item img {
+    height: 220px;
   }
 
 }

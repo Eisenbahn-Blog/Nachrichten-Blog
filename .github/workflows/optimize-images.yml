@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: ImageMagick installieren
         shell: bash
@@ -29,35 +27,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y imagemagick
 
-      - name: Neue und geänderte Bilder optimieren
+      - name: Fehlende WebP-Versionen erzeugen
         shell: bash
         run: |
           set -e
 
           mkdir -p assets/uploads/optimized
 
-          changed_files=""
-
-          if git rev-parse HEAD^ >/dev/null 2>&1; then
-            changed_files="$(git diff --name-only HEAD^ HEAD -- \
-              'assets/uploads/*.jpg' \
-              'assets/uploads/*.jpeg' \
-              'assets/uploads/*.JPG' \
-              'assets/uploads/*.JPEG' \
-              'assets/uploads/*.png' \
-              'assets/uploads/*.PNG' || true)"
-          fi
-
-          for file in $changed_files; do
-
-            if [ ! -f "$file" ]; then
-              continue
-            fi
+          find assets/uploads -maxdepth 1 -type f \( \
+            -iname "*.jpg" \
+            -o -iname "*.jpeg" \
+            -o -iname "*.png" \
+          \) -print0 |
+          while IFS= read -r -d '' file; do
 
             filename="$(basename "$file")"
             name="${filename%.*}"
-
             output="assets/uploads/optimized/${name}.webp"
+
+            if [ -f "$output" ]; then
+              echo "Bereits vorhanden: $output"
+              continue
+            fi
 
             echo "Optimiere: $file"
             echo "       -> $output"

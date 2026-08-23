@@ -7,8 +7,8 @@ description: So findest du dich im Eisenbahn-Blog zurecht.
 <section class="page-header">
   <div class="container">
     <span class="eyebrow">Eisenbahn-Blog</span>
-    <h1>Blog nutzen</h1>
-    <p>Alles Wichtige auf einen Blick – so findest du Nachrichten, Themen und Informationen rund um Eisenbahn und ÖPNV.</p>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
   </div>
 </section>
 
@@ -16,98 +16,33 @@ description: So findest du dich im Eisenbahn-Blog zurecht.
 
   <div class="feature-grid">
 
-    <article class="feature-card">
-      <div class="feature-icon">📰</div>
-      <h2>Beiträge lesen</h2>
-      <p>
-        Auf der Startseite findest du die neuesten Beiträge des
-        Eisenbahn-Blogs. Öffne einen Artikel, um die vollständige
-        Meldung, Bilder und weitere Informationen zu lesen.
-      </p>
-    </article>
+    {% for feature in page.features %}
+    <article class="feature-card{% if feature.alert %} feature-card-alert{% endif %}">
+      {% if feature.icon %}
+      <div class="feature-icon">{{ feature.icon }}</div>
+      {% endif %}
 
-    <article class="feature-card">
-      <div class="feature-icon">🔎</div>
-      <h2>Themen entdecken</h2>
-      <p>
-        Unsere Beiträge beschäftigen sich unter anderem mit Eisenbahn,
-        ÖPNV, Baustellen, Fahrzeugen, Bahnhöfen und weiteren Themen.
-      </p>
-    </article>
+      <h2>{{ feature.title }}</h2>
 
-    <article class="feature-card">
-      <div class="feature-icon">🏷️</div>
-      <h2>Kategorien</h2>
       <p>
-        Kategorien helfen dir dabei, Beiträge nach bestimmten
-        Themenbereichen zu entdecken und schneller passende Meldungen
-        zu finden.
+        {{ feature.text }}
       </p>
     </article>
-
-    <article class="feature-card">
-      <div class="feature-icon">📍</div>
-      <h2>Regionen</h2>
-      <p>
-        Eisenbahn findet überall statt. Deshalb können Beiträge
-        verschiedenen Bundesländern und Regionen zugeordnet werden.
-      </p>
-    </article>
-
-    <article class="feature-card feature-card-alert">
-      <div class="feature-icon">🚨</div>
-      <h2>Eilmeldungen</h2>
-      <p>
-        Besonders wichtige oder aktuelle Ereignisse können als
-        Eilmeldung hervorgehoben werden. So erkennst du wichtige
-        Nachrichten sofort.
-      </p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-icon">📷</div>
-      <h2>Bilder & Galerien</h2>
-      <p>
-        Viele Beiträge können mit Bildern und Galerien ergänzt werden.
-        Bildunterschriften und Bildnachweise geben zusätzliche
-        Informationen zu den verwendeten Aufnahmen.
-      </p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-icon">👤</div>
-      <h2>Autoren</h2>
-      <p>
-        Hinter den Beiträgen stehen verschiedene Mitglieder der
-        Redaktion. Über die Angaben zum Autor kannst du mehr über
-        die Verfasser eines Beitrags erfahren.
-      </p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-icon">📱</div>
-      <h2>Unterwegs lesen</h2>
-      <p>
-        Der Eisenbahn-Blog ist für Smartphone, Tablet und Computer
-        ausgelegt. So kannst du Nachrichten auch unterwegs bequem
-        lesen.
-      </p>
-    </article>
+    {% endfor %}
 
   </div>
 
 </section>
 
+{% if page.tip %}
 <section class="container section info-section">
 
   <div class="info-panel">
     <span class="eyebrow">Tipp</span>
-    <h2>Du suchst eine bestimmte Meldung?</h2>
-    <p>
-      Nutze die Navigation und die Kategorien, um dich durch den Blog
-      zu bewegen. Neue Beiträge erscheinen auf der Startseite und
-      werden dort chronologisch angezeigt.
-    </p>
+
+    <h2>{{ page.tip.title }}</h2>
+
+    {{ page.tip.text | markdownify }}
 
     <a class="button" href="{{ '/' | relative_url }}">
       Zur Startseite →
@@ -115,21 +50,17 @@ description: So findest du dich im Eisenbahn-Blog zurecht.
   </div>
 
 </section>
+{% endif %}
 
+{% if page.participate %}
 <section class="container section">
 
   <div class="info-panel">
     <span class="eyebrow">Mitmachen</span>
-    <h2>Du möchtest selbst Beiträge schreiben?</h2>
-    <p>
-      Der Eisenbahn-Blog verfügt über einen eigenen Redaktionsbereich.
-      Dieser Bereich ist ausschließlich für freigeschaltete Mitglieder
-      der Redaktion und Autoren vorgesehen.
-    </p>
-    <p>
-      Informationen zum Erstellen und Bearbeiten von Beiträgen befinden
-      sich direkt im Redaktionssystem.
-    </p>
+
+    <h2>{{ page.participate.title }}</h2>
+
+    {{ page.participate.text | markdownify }}
 
     <a class="button" href="{{ '/admin/#/' | relative_url }}">
       Zum Redaktionsbereich →
@@ -137,3 +68,4 @@ description: So findest du dich im Eisenbahn-Blog zurecht.
   </div>
 
 </section>
+{% endif %}
