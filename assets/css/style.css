@@ -1879,3 +1879,15 @@ main > ol {
   display: none !important;
 }
 
+
+/* Mobile-Menü: geschlossen / geöffnet */
+@media (max-width: 850px) {
+  #mainNav {
+    display: none;
+  }
+
+  #mainNav.open {
+    display: block;
+  }
+}
+
