@@ -271,44 +271,59 @@ const createOAuth = (env: Env) => {
 };
 
 const handleAuth = async (url: URL, env: Env) => {
-    const provider = url.searchParams.get('provider');
+    try {
+        const provider = url.searchParams.get('provider');
 
-    if (provider !== 'github') {
-        return new Response('Invalid provider', { status: 400 });
+        if (provider !== 'github') {
+            return new Response('Invalid provider', { status: 400 });
+        }
+
+        const repoIsPrivate =
+            env.GITHUB_REPO_PRIVATE !== undefined &&
+            env.GITHUB_REPO_PRIVATE !== '0';
+
+        const repoScope = repoIsPrivate
+            ? 'repo,user,read:org'
+            : 'public_repo,user,read:org';
+
+        const oauth2 = createOAuth(env);
+
+        const state =
+            url.searchParams.get('state') ||
+            randomHex(16);
+
+        const authorizationUri = oauth2.authorizeURL({
+            redirect_uri:
+                `https://${url.hostname}/callback?provider=github`,
+            scope: repoScope,
+            state,
+        });
+
+        return new Response(null, {
+            status: 302,
+            headers: {
+                Location: authorizationUri,
+                'Cache-Control': 'no-store',
+            },
+        });
+    } catch (error) {
+        const message =
+            error instanceof Error
+                ? error.message
+                : String(error);
+
+        return new Response(
+            `OAuth-Fehler: ${message}`,
+            {
+                status: 500,
+                headers: {
+                    'Content-Type':
+                        'text/plain; charset=utf-8',
+                    'Cache-Control': 'no-store',
+                },
+            }
+        );
     }
-
-    const repoIsPrivate =
-        env.GITHUB_REPO_PRIVATE !== undefined &&
-        env.GITHUB_REPO_PRIVATE !== '0';
-
-    const repoScope = repoIsPrivate
-        ? 'repo,user,read:org'
-        : 'public_repo,user,read:org';
-
-    const oauth2 = createOAuth(env);
-
-    /*
-     * Decap CMS liefert einen eigenen State.
-     * Diesen müssen wir unverändert an GitHub weitergeben.
-     */
-    const state =
-        url.searchParams.get('state') ||
-        randomHex(16);
-
-    const authorizationUri = oauth2.authorizeURL({
-        redirect_uri:
-            `https://${url.hostname}/callback?provider=github`,
-        scope: repoScope,
-        state,
-    });
-
-    return new Response(null, {
-        status: 302,
-        headers: {
-            Location: authorizationUri,
-            'Cache-Control': 'no-store',
-        },
-    });
 };
 
 const callbackScriptResponse = (
@@ -628,8 +643,20 @@ export default {
         }
 
         /*
-         * Alle übrigen Seiten kommen weiterhin von
-         * GitHub Pages.
+         * Alle übrigen Seiten sind privat geschützt.
+         * Ohne gültige Session wird die Zugangscode-Seite angezeigt.
+         */
+        const authenticated = await verifySession(
+            request.headers.get('Cookie'),
+            env.BLOG_ACCESS_CODE
+        );
+
+        if (!authenticated) {
+            return loginPage();
+        }
+
+        /*
+         * Angemeldete Besucher dürfen die Blog-Seiten sehen.
          */
         return proxyBlog(
             request,
