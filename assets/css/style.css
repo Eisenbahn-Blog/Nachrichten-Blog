@@ -76,7 +76,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 45px;
 }
 
 .brand {
@@ -978,10 +978,10 @@ footer {
 .footer-main {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
 
-  padding-top: 55px;
-  padding-bottom: 50px;
+  padding-top: 45px;
+  padding-bottom: 40px;
 }
 
 .footer-main h3,
@@ -1202,6 +1202,17 @@ footer {
     border-bottom: 1px solid var(--line);
 
     box-shadow: 0 12px 25px rgba(60, 30, 20, .09);
+  }
+
+  #mainNav a {
+    display: block;
+    padding: 11px 8px;
+    margin: 2px 0;
+    border-radius: 9px;
+  }
+
+  #mainNav a:hover {
+    background: #f3eee9;
   }
 
   #mainNav.open {

@@ -168,6 +168,30 @@ function loginPage(error = ''): Response {
             cursor: pointer;
         }
 
+        .private-notice {
+            margin: 20px 0;
+            padding: 16px;
+            background: #f1f4f6;
+            border: 1px solid #dce2e6;
+            border-radius: 12px;
+        }
+
+        .private-notice strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .private-notice p {
+            margin: 0 0 8px;
+            font-size: 14px;
+        }
+
+        .private-notice a {
+            color: #c8102e;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
         .error {
             color: #d71920;
             font-weight: 700;
@@ -184,6 +208,19 @@ function loginPage(error = ''): Response {
         <div class="logo">🚆</div>
         <h1>Eisenbahn-News</h1>
         <p>Dieser Blog ist nicht öffentlich zugänglich.</p>
+
+        <div class="private-notice">
+            <strong>🔐 Privater Bereich</strong>
+            <p>
+                Die Inhalte sind ausschließlich für einen privaten
+                Personenkreis bestimmt und dürfen nicht ohne Erlaubnis
+                weitergegeben oder öffentlich veröffentlicht werden.
+            </p>
+            <a href="https://eisenbahn-blog.github.io/Nachrichten-Blog/nutzungsbedingungen/">
+                Nutzungsbedingungen →
+            </a>
+        </div>
+
         <p>Bitte Zugangscode eingeben.</p>
 
         ${error ? `<p class="error">${error}</p>` : ''}
