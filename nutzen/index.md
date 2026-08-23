@@ -2,6 +2,22 @@
 layout: default
 title: Blog nutzen
 description: So findest du dich im Eisenbahn-Blog zurecht.
+features:
+  - alert: true
+    title: Aktuelle Beiträge
+    text: Entdecke die neuesten Nachrichten, Berichte und Meldungen aus der Welt der
+      Eisenbahn.
+    icon: 📰
+  - alert: false
+    icon: 🚆
+    title: Eisenbahn-News
+    text: Aktuelle Informationen zu Strecken, Fahrzeugen, Bauarbeiten und Projekten.
+tip:
+  title: Abonnement
+  text: Hier mache diese
+participate:
+  title: Mitmachen
+  text: Bitte eine Mail an ...
 ---
 
 <section class="page-header">
