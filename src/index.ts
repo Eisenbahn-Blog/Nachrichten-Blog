@@ -559,6 +559,25 @@ export default {
             return handleCallback(url, env);
         }
 
+        if (url.pathname === '/debug-env') {
+            return new Response(
+                JSON.stringify({
+                    blogAccessCodeExists:
+                        typeof env.BLOG_ACCESS_CODE === 'string',
+                    blogAccessCodeLength:
+                        env.BLOG_ACCESS_CODE?.length ?? 0,
+                    method: request.method,
+                }),
+                {
+                    status: 200,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-store',
+                    },
+                }
+            );
+        }
+
         /*
          * Anmeldung
          */
@@ -643,20 +662,44 @@ export default {
         }
 
         /*
-         * Alle übrigen Seiten sind privat geschützt.
-         * Ohne gültige Session wird die Zugangscode-Seite angezeigt.
+         * Öffentliche statische Dateien des Blogs.
+         *
+         * CSS, JavaScript, Bilder und sonstige Assets dürfen
+         * nicht vom Zugangsschutz als Login-HTML beantwortet
+         * werden. Sie werden direkt aus den Worker-Assets
+         * ausgeliefert.
          */
-        const authenticated = await verifySession(
-            request.headers.get('Cookie'),
-            env.BLOG_ACCESS_CODE
-        );
+        if (
+            url.pathname.startsWith('/Nachrichten-Blog/assets/') ||
+            url.pathname.startsWith('/Nachrichten-Blog/images/')
+        ) {
+            const assetPath = url.pathname.replace(
+                /^\/Nachrichten-Blog/,
+                ''
+            );
 
-        if (!authenticated) {
-            return loginPage();
+            const assetRequest = new Request(
+                new URL(
+                    assetPath + url.search,
+                    request.url
+                ).toString(),
+                {
+                    method: request.method,
+                    headers: request.headers,
+                }
+            );
+
+            return env.ASSETS.fetch(assetRequest);
         }
 
         /*
-         * Angemeldete Besucher dürfen die Blog-Seiten sehen.
+         * Öffentlicher Blog
+         *
+         * Die normalen Blog-Seiten werden direkt von
+         * GitHub Pages geladen.
+         *
+         * Der Redaktionsbereich /admin/ und OAuth bleiben
+         * davon getrennt und funktionieren weiterhin.
          */
         return proxyBlog(
             request,
