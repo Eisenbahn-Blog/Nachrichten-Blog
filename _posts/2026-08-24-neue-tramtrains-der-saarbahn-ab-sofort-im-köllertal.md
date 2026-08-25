@@ -1,5 +1,6 @@
 ---
 title: Neue TramTrains der Saarbahn ab sofort im Köllertal
+excerpt: Neue bahn
 date: 2026-08-24T22:39:00+02:00
 author: Leonard Klinger
 categories:
