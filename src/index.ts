@@ -703,13 +703,25 @@ export default {
         }
 
         /*
+         * Passwortschutz für den öffentlichen Blog.
+         *
+         * Statische Assets bleiben oben öffentlich erreichbar,
+         * damit Bilder, CSS und JavaScript funktionieren.
+         */
+        const authenticated = await verifySession(
+            request.headers.get('Cookie'),
+            env.BLOG_ACCESS_CODE
+        );
+
+        if (!authenticated) {
+            return loginPage();
+        }
+
+        /*
          * Öffentlicher Blog
          *
-         * Die normalen Blog-Seiten werden direkt von
-         * GitHub Pages geladen.
-         *
-         * Der Redaktionsbereich /admin/ und OAuth bleiben
-         * davon getrennt und funktionieren weiterhin.
+         * Nach erfolgreicher Anmeldung wird der eigentliche
+         * Blog von GitHub Pages geladen.
          */
         return proxyBlog(
             request,
