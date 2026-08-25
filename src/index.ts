@@ -664,17 +664,41 @@ export default {
         /*
          * Öffentliche statische Dateien des Blogs.
          *
-         * Assets werden direkt von GitHub Pages geladen.
-         * Dadurch funktionieren auch neu über Decap CMS
-         * hochgeladene Bilder automatisch.
+         * CSS, JavaScript, Bilder und sonstige Assets werden
+         * direkt von GitHub Pages geladen.
+         *
+         * Wichtig: Der komplette /Nachrichten-Blog/-Pfad bleibt
+         * erhalten, damit auch neu über Decap CMS hochgeladene
+         * Dateien automatisch funktionieren.
          */
         if (
             url.pathname.startsWith('/Nachrichten-Blog/assets/') ||
             url.pathname.startsWith('/Nachrichten-Blog/images/')
         ) {
-            return proxyBlog(
-                request,
-                url
+            const target = new URL(
+                `https://eisenbahn-blog.github.io${url.pathname}`,
+            );
+
+            target.search = url.search;
+
+            const assetResponse = await fetch(
+                new Request(target.toString(), {
+                    method: request.method,
+                    headers: request.headers,
+                    redirect: 'follow',
+                })
+            );
+
+            const headers = new Headers(assetResponse.headers);
+            headers.set('Cache-Control', 'no-store');
+
+            return new Response(
+                assetResponse.body,
+                {
+                    status: assetResponse.status,
+                    statusText: assetResponse.statusText,
+                    headers,
+                }
             );
         }
 
