@@ -664,32 +664,18 @@ export default {
         /*
          * Öffentliche statische Dateien des Blogs.
          *
-         * CSS, JavaScript, Bilder und sonstige Assets dürfen
-         * nicht vom Zugangsschutz als Login-HTML beantwortet
-         * werden. Sie werden direkt aus den Worker-Assets
-         * ausgeliefert.
+         * Assets werden direkt von GitHub Pages geladen.
+         * Dadurch funktionieren auch neu über Decap CMS
+         * hochgeladene Bilder automatisch.
          */
         if (
             url.pathname.startsWith('/Nachrichten-Blog/assets/') ||
             url.pathname.startsWith('/Nachrichten-Blog/images/')
         ) {
-            const assetPath = url.pathname.replace(
-                /^\/Nachrichten-Blog/,
-                ''
+            return proxyBlog(
+                request,
+                url
             );
-
-            const assetRequest = new Request(
-                new URL(
-                    assetPath + url.search,
-                    request.url
-                ).toString(),
-                {
-                    method: request.method,
-                    headers: request.headers,
-                }
-            );
-
-            return env.ASSETS.fetch(assetRequest);
         }
 
         /*
