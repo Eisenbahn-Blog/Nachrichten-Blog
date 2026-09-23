@@ -16,6 +16,10 @@ changes:
     icon: 🎨
     title: Farben verbessert
     text: Alle Farben wurden verbessert.
+  - date: 23. September 2026
+    icon: 🖥
+    title: "Domain registriert "
+    text: Es wurde die Domain registriert und hinzugefügt.
 footer:
   title: Alle Änderungen
   text: Es gab bisher viele Änderungen. In Zukunft informieren wir hier.
