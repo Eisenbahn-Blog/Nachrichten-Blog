@@ -14,10 +14,14 @@ features:
     text: Aktuelle Informationen zu Strecken, Fahrzeugen, Bauarbeiten und Projekten.
 tip:
   title: Abonnement
-  text: Hier mache diese
+  text: Jeden Sonntag oder auch unregelmäßig kannst du zu den neuesten Themen
+    informiert werden. Melde dich einfach im Formular an.
 participate:
   title: Mitmachen
-  text: Bitte eine Mail an ...
+  text: |-
+    Du hast auch Lust, mitzumachen?
+
+    Dann sende eine Mail an eisenbahn.blog.news@gmail.com!
 ---
 
 <section class="page-header">
